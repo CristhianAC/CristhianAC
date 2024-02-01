@@ -38,7 +38,7 @@
 
 <p align="center">
 
-<a href="https://www.linkedin.com/in/cristhian-agamez-cervantes"><img src="https://img.shields.io/badge/-Cristhian%20Agamez%20Singh-0077B5?style=flat&logo=Linkedin&logoColor=white"/></a>
+<a href="https://www.linkedin.com/in/cristhian-agamez-cervantes"><img src="https://img.shields.io/badge/-Cristhian%20Agamez-0077B5?style=flat&logo=Linkedin&logoColor=white"/></a>
 <a href="mailto:cristhian_agamez@outlook.com"><img src="https://img.shields.io/badge/-cristhian_agamez@outlook.com-54daff?style=flat&logo=microsoft-outlook&logoColor=white"/></a>
 <a href="https://https://www.instagram.com/cristhianagamez?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><img src="https://img.shields.io/badge/-@cristhian_agamez-E4405F?style=flat&logo=Instagram&logoColor=white"/></a>
 </p>
