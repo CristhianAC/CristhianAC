@@ -12,7 +12,10 @@
 
 ✉️  Let's connect! Shoot me an email at cristhian_agamez@outlook.com, and let's create something extraordinary together!
 
-<img alt="Night Coding" src="https://media.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif" align="right"/>
+<div>
+<p>¡Hola! Soy un apasionado desarrollador fullstack.</p>
+<img align="right" src="https://github-readme-stats.vercel.app/api?username=CristhianAC&show_icons=true&include_all_commits=true&count_private=true&hide_border=true&theme=codeSTACKr" alt="Cristhian Agamez" />
+</div>
 
 ### 🛠 &nbsp;Tech Stack
 ![Python](https://img.shields.io/badge/-Python-05122A?style=flat&logo=python)&nbsp;
