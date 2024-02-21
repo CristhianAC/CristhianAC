@@ -36,6 +36,7 @@
 ![Node.js](https://img.shields.io/badge/-Node.js-05122A?style=flat&logo=node.js)&nbsp;
 ![Django](https://img.shields.io/badge/-Django-05122A?style=flat&logo=django&logoColor=092E20)&nbsp;
 ![Astro](https://img.shields.io/badge/-Astro-05122A?style=flat&logo=astro)&nbsp;
+![Maui](https://img.shields.io/badge/-.Net-05122A?style=flat&logo=.net)&nbsp;
 ### Techs
 
 ![Git](https://img.shields.io/badge/-Git-05122A?style=flat&logo=git)&nbsp;
@@ -45,7 +46,7 @@
 ![DaVinci](https://img.shields.io/badge/-Davinci-05122A?style=flat&logo=Davinci-Resolve)&nbsp;
 ![AfterFX](https://img.shields.io/badge/-AfterEffects-05122A?style=flat&logo=adobe-after-effects)&nbsp;
 ![Unity](https://img.shields.io/badge/-Unity-05122A?style=flat&logo=unity)&nbsp;
-![Maui](https://img.shields.io/badge/-.Net-05122A?style=flat&logo=.net)&nbsp;
+
 
 
 ### 🤝🏻 &nbsp;Connect with Me
