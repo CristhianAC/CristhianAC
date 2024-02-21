@@ -17,7 +17,7 @@
 ![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=CristhianAC&layout=donut&theme=midnight-purple)
 
 <div>
-<p>¡Hola! Soy un apasionado desarrollador fullstack.</p>
+
 <img align="right" src="https://github-readme-stats.vercel.app/api?username=CristhianAC&show_icons=true&include_all_commits=true&count_private=true&hide_border=true&theme=midnight-purple" alt="Cristhian Agamez" />
 </div>
 
