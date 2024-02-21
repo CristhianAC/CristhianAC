@@ -11,6 +11,7 @@
 ✍️  Fueled by creativity, I dabble in Graphic Design and immerse myself in the art of video editing during my free time.
 
 ✉️  Let's connect! Shoot me an email at cristhian_agamez@outlook.com, and let's create something extraordinary together!
+---
 ![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=CristhianAC&layout=compact&theme=midnight-purple)
 <div>
 <p>¡Hola! Soy un apasionado desarrollador fullstack.</p>
