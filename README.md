@@ -12,7 +12,7 @@
 
 ✉️  Let's connect! Shoot me an email at cristhian_agamez@outlook.com, and let's create something extraordinary together!
 ---
-![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=CristhianAC&layout=compact&theme=midnight-purple)
+![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=CristhianAC&layout=donut&theme=midnight-purple)
 
 <div>
 <p>¡Hola! Soy un apasionado desarrollador fullstack.</p>
