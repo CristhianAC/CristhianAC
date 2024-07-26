@@ -1,6 +1,6 @@
 
 <h1 align="center"><b>Hey, I'm Cristhian Agamez </b></h1>
-<h2>👨🏻‍💻 &nbsp;About Me</h2>
+<h2> &nbsp;About Me</h2>
 
 
 💡  Passionate about exploring cutting-edge technologies and crafting innovative software solutions.
