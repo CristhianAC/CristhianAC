@@ -24,30 +24,30 @@
 ## 🛠 &nbsp;Tech Stack
 ### Languages
 
-![Python](https://img.shields.io/badge/-Python-05122A?style=for-the-badge&logo=python)&nbsp;
-![JavaScript](https://img.shields.io/badge/-JavaScript-05122A?style=for-the-badge&logo=javascript)&nbsp;
-![C++](https://img.shields.io/badge/-TypeScript-05122A?style=flat&logo=typescript&logoColor=00599C)&nbsp;
-![HTML](https://img.shields.io/badge/-HTML-05122A?style=flat&logo=HTML5)&nbsp;
-![CSS](https://img.shields.io/badge/-CSS-05122A?style=flat&logo=CSS3&logoColor=1572B6)&nbsp;
-![C#](https://img.shields.io/badge/-CSharp-05122A?style=flat&logo=Csharp)&nbsp;
-![Kotlin](https://img.shields.io/badge/-Kotlin-05122A?style=flat&logo=Kotlin)&nbsp;
+![Python](https://img.shields.io/badge/-Python-05122A?style=for-the-badge&logo=python&logoColor=white)&nbsp;
+![JavaScript](https://img.shields.io/badge/-JavaScript-05122A?style=for-the-badge&logo=javascript&logoColor=white)&nbsp;
+![C++](https://img.shields.io/badge/-TypeScript-05122A?style=for-the-badge&logo=typescript&logoColor=white)&nbsp;
+![HTML](https://img.shields.io/badge/-HTML-05122A?style=for-the-badge&logo=HTML5&logoColor=white)&nbsp;
+![CSS](https://img.shields.io/badge/-CSS-05122A?style=for-the-badge&logo=CSS3&logoColor=white)&nbsp;
+![C#](https://img.shields.io/badge/-CSharp-05122A?style=for-the-badge&logo=Csharp&logoColor=white)&nbsp;
+![Kotlin](https://img.shields.io/badge/-Kotlin-05122A?style=for-the-badge&logo=Kotlin&logoColor=white)&nbsp;
 ### Frameworks
 
-![React](https://img.shields.io/badge/-React-05122A?style=flat&logo=react)&nbsp;
-![Node.js](https://img.shields.io/badge/-Node.js-05122A?style=flat&logo=node.js)&nbsp;
-![Django](https://img.shields.io/badge/-Django-05122A?style=flat&logo=django&logoColor=092E20)&nbsp;
-![Astro](https://img.shields.io/badge/-Astro-05122A?style=flat&logo=astro)&nbsp;
-![Maui](https://img.shields.io/badge/-.Net-05122A?style=flat&logo=.net)&nbsp;
-![Flutter](https://img.shields.io/badge/-Flutter-05122A?style=flat&logo=flutter)&nbsp;
+![React](https://img.shields.io/badge/-React-05122A?style=for-the-badge&logo=react&logoColor=white)&nbsp;
+![Node.js](https://img.shields.io/badge/-Node.js-05122A?style=for-the-badge&logo=node.js&logoColor=white)&nbsp;
+![Django](https://img.shields.io/badge/-Django-05122A?style=for-the-badge&logo=django&logoColor=white)&nbsp;
+![Astro](https://img.shields.io/badge/-Astro-05122A?style=for-the-badge&logo=astro&logoColor=white)&nbsp;
+![Maui](https://img.shields.io/badge/-.Net-05122A?style=for-the-badge&logo=.net&logoColor=white)&nbsp;
+![Flutter](https://img.shields.io/badge/-Flutter-05122A?style=for-the-badge&logo=flutter&logoColor=white)&nbsp;
 ### Techs
 
-![Git](https://img.shields.io/badge/-Git-05122A?style=flat&logo=git)&nbsp;
-![GitHub](https://img.shields.io/badge/-GitHub-05122A?style=flat&logo=github)&nbsp;
-![Illustrator](https://img.shields.io/badge/-Illustrator-05122A?style=flat&logo=adobe-illustrator)&nbsp;
-![Photoshop](https://img.shields.io/badge/-Photoshop-05122A?style=flat&logo=adobe-photoshop)&nbsp;
-![DaVinci](https://img.shields.io/badge/-Davinci-05122A?style=flat&logo=Davinci-Resolve)&nbsp;
-![AfterFX](https://img.shields.io/badge/-AfterEffects-05122A?style=flat&logo=adobe-after-effects)&nbsp;
-![Unity](https://img.shields.io/badge/-Unity-05122A?style=flat&logo=unity)&nbsp;
+![Git](https://img.shields.io/badge/-Git-05122A?style=for-the-badge&logo=git&logoColor=white)&nbsp;
+![GitHub](https://img.shields.io/badge/-GitHub-05122A?style=for-the-badge&logo=github&logoColor=white)&nbsp;
+![Illustrator](https://img.shields.io/badge/-Illustrator-05122A?style=for-the-badge&logo=adobe-illustrator&logoColor=white)&nbsp;
+![Photoshop](https://img.shields.io/badge/-Photoshop-05122A?style=for-the-badge&logo=adobe-photoshop&logoColor=white)&nbsp;
+![DaVinci](https://img.shields.io/badge/-Davinci-05122A?style=for-the-badge&logo=Davinci-Resolve&logoColor=white)&nbsp;
+![AfterFX](https://img.shields.io/badge/-AfterEffects-05122A?style=for-the-badge&logo=adobe-after-effects&logoColor=white)&nbsp;
+![Unity](https://img.shields.io/badge/-Unity-05122A?style=for-the-badge&logo=unity&logoColor=white)&nbsp;
 
 
 
