@@ -24,30 +24,28 @@
 ## 🛠 &nbsp;Tech Stack
 ### Languages
 
-![Python](https://img.shields.io/badge/-Python-05122A?style=for-the-badge&logo=python&logoColor=white)&nbsp;
-![JavaScript](https://img.shields.io/badge/-JavaScript-05122A?style=for-the-badge&logo=javascript&logoColor=white)&nbsp;
-![C++](https://img.shields.io/badge/-TypeScript-05122A?style=for-the-badge&logo=typescript&logoColor=white)&nbsp;
-![HTML](https://img.shields.io/badge/-HTML-05122A?style=for-the-badge&logo=HTML5&logoColor=white)&nbsp;
-![CSS](https://img.shields.io/badge/-CSS-05122A?style=for-the-badge&logo=CSS3&logoColor=white)&nbsp;
-![C#](https://img.shields.io/badge/-CSharp-05122A?style=for-the-badge&logo=Csharp&logoColor=white)&nbsp;
-![Kotlin](https://img.shields.io/badge/-Kotlin-05122A?style=for-the-badge&logo=Kotlin&logoColor=white)&nbsp;
+![Python](https://img.shields.io/badge/Python%20-%2314354C.svg?style=for-the-badge&logo=python&logoColor=white)&nbsp;
+![JavaScript](https://img.shields.io/badge/JavaScript%20-%23F7DF1E.svg?style=for-the-badge&logo=javascript&logoColor=black)&nbsp;
+![C++](https://img.shields.io/badge/-TypeScript%20-%2314354C.svg?style=for-the-badge&logo=typescript&logoColor=white)&nbsp;
+![HTML](https://img.shields.io/badge/HTML5%20-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)&nbsp;
+![CSS](https://img.shields.io/badge/CSS%20-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)&nbsp;
+![Kotlin](https://img.shields.io/badge/-Kotlin-9C27B0?style=for-the-badge&logo=Kotlin&logoColor=white)&nbsp;
 ### Frameworks
 
-![React](https://img.shields.io/badge/-React-05122A?style=for-the-badge&logo=react&logoColor=white)&nbsp;
-![Node.js](https://img.shields.io/badge/-Node.js-05122A?style=for-the-badge&logo=node.js&logoColor=white)&nbsp;
-![Django](https://img.shields.io/badge/-Django-05122A?style=for-the-badge&logo=django&logoColor=white)&nbsp;
-![Astro](https://img.shields.io/badge/-Astro-05122A?style=for-the-badge&logo=astro&logoColor=white)&nbsp;
-![Maui](https://img.shields.io/badge/-.Net-05122A?style=for-the-badge&logo=.net&logoColor=white)&nbsp;
-![Flutter](https://img.shields.io/badge/-Flutter-05122A?style=for-the-badge&logo=flutter&logoColor=white)&nbsp;
+![React](https://img.shields.io/badge/React%20-%2320232a.svg?style=for-the-badge&logo=React&logoColor=blue)&nbsp;
+![Node.js](https://img.shields.io/badge/-Node.js-54824a?style=for-the-badge&logo=node.js&logoColor=white)&nbsp;
+![Django](https://img.shields.io/badge/-Django-0a4a32?style=for-the-badge&logo=django&logoColor=white)&nbsp;
+![Astro](https://img.shields.io/badge/Astro%20-%1c146b.svg?style=for-the-badge&logo=Astro&logoColor=white)&nbsp;
+![Flutter](https://img.shields.io/badge/-Flutter-5eb2e9?style=for-the-badge&logo=flutter&logoColor=white)&nbsp;
 ### Techs
 
-![Git](https://img.shields.io/badge/-Git-05122A?style=for-the-badge&logo=git&logoColor=white)&nbsp;
+![Git](https://img.shields.io/badge/-Git-ec502c?style=for-the-badge&logo=git&logoColor=white)&nbsp;
 ![GitHub](https://img.shields.io/badge/-GitHub-05122A?style=for-the-badge&logo=github&logoColor=white)&nbsp;
-![Illustrator](https://img.shields.io/badge/-Illustrator-05122A?style=for-the-badge&logo=adobe-illustrator&logoColor=white)&nbsp;
-![Photoshop](https://img.shields.io/badge/-Photoshop-05122A?style=for-the-badge&logo=adobe-photoshop&logoColor=white)&nbsp;
-![DaVinci](https://img.shields.io/badge/-Davinci-05122A?style=for-the-badge&logo=Davinci-Resolve&logoColor=white)&nbsp;
-![AfterFX](https://img.shields.io/badge/-AfterEffects-05122A?style=for-the-badge&logo=adobe-after-effects&logoColor=white)&nbsp;
-![Unity](https://img.shields.io/badge/-Unity-05122A?style=for-the-badge&logo=unity&logoColor=white)&nbsp;
+![Illustrator](https://img.shields.io/badge/-Illustrator-320000?style=for-the-badge&logo=adobe-illustrator&logoColor=white)&nbsp;
+![Photoshop](https://img.shields.io/badge/-Photoshop-001e36?style=for-the-badge&logo=adobe-photoshop&logoColor=white)&nbsp;
+![DaVinci](https://img.shields.io/badge/-Davinci-262626?style=for-the-badge&logo=Davinci-Resolve&logoColor=white)&nbsp;
+![AfterFX](https://img.shields.io/badge/-AfterEffects-01005a?style=for-the-badge&logo=adobe-after-effects&logoColor=white)&nbsp;
+![Unity](https://img.shields.io/badge/-Unity-000000?style=for-the-badge&logo=unity&logoColor=white)&nbsp;
 
 
 
