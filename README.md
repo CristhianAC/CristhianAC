@@ -14,16 +14,17 @@
 
 
 ---
-![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=CristhianAC&layout=donut&theme=midnight-purple)
-
 <div>
 
 <img align="right" src="https://github-readme-stats.vercel.app/api?username=CristhianAC&show_icons=true&include_all_commits=true&count_private=true&hide_border=true&theme=midnight-purple" alt="Cristhian Agamez" />
 </div>
+
+![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=CristhianAC&layout=donut&theme=midnight-purple)
 <p align="center">
     <a href="https://github.com/jrohitofficial/jrohitofficial">
         <img src="https://github-profile-trophy.vercel.app/?username=CristhianAC&column=-1&theme=dracula&layout=compact"width="95%"/> 
 </p>
+
 
 ## 🛠 &nbsp;Tech Stack
 ### Languages
