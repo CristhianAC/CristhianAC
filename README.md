@@ -42,7 +42,7 @@
 ![Node.js](https://img.shields.io/badge/-Node.js-54824a?style=for-the-badge&logo=node.js&logoColor=white)&nbsp;
 ![Django](https://img.shields.io/badge/-Django-0a4a32?style=for-the-badge&logo=django&logoColor=white)&nbsp;
 ![Astro](https://img.shields.io/badge/Astro%20-%1c146b.svg?style=for-the-badge&logo=Astro&logoColor=white)&nbsp;
-![Flutter](https://img.shields.io/badge/-Flutter-5eb2e9?style=for-the-badge&logo=flutter&logoColor=white)&nbsp;
+
 ### Techs
 
 ![Git](https://img.shields.io/badge/-Git-ec502c?style=for-the-badge&logo=git&logoColor=white)&nbsp;
