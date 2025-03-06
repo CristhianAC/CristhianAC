@@ -42,6 +42,7 @@
 ![Node.js](https://img.shields.io/badge/-Node.js-54824a?style=for-the-badge&logo=node.js&logoColor=white)&nbsp;
 ![Django](https://img.shields.io/badge/-Django-0a4a32?style=for-the-badge&logo=django&logoColor=white)&nbsp;
 ![Astro](https://img.shields.io/badge/Astro%20-%1c146b.svg?style=for-the-badge&logo=Astro&logoColor=white)&nbsp;
+![Svelte](https://img.shields.io/badge/Svelte%20-%2320232a.svg?style=for-the-badge&logo=Svelte&logoColor=white)&nbsp;
 
 ### Techs
 
