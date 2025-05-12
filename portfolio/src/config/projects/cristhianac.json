@@ -1,0 +1,288 @@
+{
+    "id": "cristhianac",
+    "title": "Portfolio (This Website)",
+    "description": "An open source interactive portfolio website, with a clean and modern design, sections for education, experience, skills, competitions, and more. Built with Astro.js, Tailwind CSS, TypeScript, React, and Vercel.",
+    "repoUrl": "https://github.com/CristhianAC/CristhianAC",
+    "liveUrl": "https://cristhianAC.dev",
+    "techStack": [
+        "Astro.js",
+        "Tailwind CSS",
+        "TypeScript",
+        "React",
+        "Vercel"
+    ],
+    "structure": {
+        "root": "CristhianAC",
+        "children": [
+            {
+                "name": ".DS_Store",
+                "type": "file"
+            },
+            {
+                "name": "README.md",
+                "type": "file"
+            },
+            {
+                "name": "portfolio",
+                "type": "directory",
+                "children": [
+                    {
+                        "name": ".gitignore",
+                        "type": "file"
+                    },
+                    {
+                        "name": "README.md",
+                        "type": "file"
+                    },
+                    {
+                        "name": "astro.config.mjs",
+                        "type": "file"
+                    },
+                    {
+                        "name": "bun.lock",
+                        "type": "file"
+                    },
+                    {
+                        "name": "package-lock.json",
+                        "type": "file"
+                    },
+                    {
+                        "name": "package.json",
+                        "type": "file"
+                    },
+                    {
+                        "name": "public",
+                        "type": "directory",
+                        "children": [
+                            {
+                                "name": "CV.pdf",
+                                "type": "file"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "src",
+                        "type": "directory",
+                        "children": [
+                            {
+                                "name": "assets",
+                                "type": "directory",
+                                "children": [
+                                    {
+                                        "name": "images",
+                                        "type": "directory",
+                                        "children": [
+                                            {
+                                                "name": "background.png",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "mac-background1.jpg",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "mac-background2.jpg",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "mac-background3.jpg",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "me.svg",
+                                                "type": "file"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "components",
+                                "type": "directory",
+                                "children": [
+                                    {
+                                        "name": "LandingPage.astro",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "global",
+                                        "type": "directory",
+                                        "children": [
+                                            {
+                                                "name": "BaseHead.astro",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "DesktopDock.tsx",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "DraggableWindow.tsx",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "GitHubViewer.tsx",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "HelpModal.tsx",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "MacTerminal.tsx",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "MacToolbar.tsx",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "MobileDock.tsx",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "NotesApp.tsx",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "ResumeViewer.tsx",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "SpotifyPlayer.tsx",
+                                                "type": "file"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "config",
+                                "type": "directory",
+                                "children": [
+                                    {
+                                        "name": "projects",
+                                        "type": "directory",
+                                        "children": [
+                                            {
+                                                "name": "clinicalmain.json",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "fadedtextrestoration.json",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "foodies.json",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "neurospeccompanionmerged.json",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "nucpa-balloons.json",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "nucpaballoonsapi.json",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "portfolio.json",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "scheds.json",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "seatreservation.json",
+                                                "type": "file"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "name": "userConfig.ts",
+                                        "type": "file"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "layouts",
+                                "type": "directory",
+                                "children": [
+                                    {
+                                        "name": "AppLayout.tsx",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "Layout.astro",
+                                        "type": "file"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "pages",
+                                "type": "directory",
+                                "children": [
+                                    {
+                                        "name": "api",
+                                        "type": "directory",
+                                        "children": [
+                                            {
+                                                "name": "chat.ts",
+                                                "type": "file"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "name": "index.astro",
+                                        "type": "file"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "styles",
+                                "type": "directory",
+                                "children": [
+                                    {
+                                        "name": "global.css",
+                                        "type": "file"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "name": "tailwind.config.js",
+                        "type": "file"
+                    },
+                    {
+                        "name": "tsconfig.json",
+                        "type": "file"
+                    },
+                    {
+                        "name": "util",
+                        "type": "directory",
+                        "children": [
+                            {
+                                "name": "astro.config.mjs",
+                                "type": "file"
+                            },
+                            {
+                                "name": "github_repo_parser.py",
+                                "type": "file"
+                            },
+                            {
+                                "name": "requirements.txt",
+                                "type": "file"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "images": []
+}

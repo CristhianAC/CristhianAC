@@ -1,0 +1,654 @@
+{
+    "id": "mipsvisualsim",
+    "title": "Mips Visual Sim",
+    "description": "An open source interactive portfolio website, to experiment how to interact with a mips processor",
+    "repoUrl": "https://github.com/CristhianAC/MIPSVisualSim",
+    "liveUrl": "https://cristhianAC.dev",
+    "techStack": [
+        "TypeScript",
+        "React",
+        "Azure"
+    ],
+    "structure": {
+        "root": "MIPSVisualSim",
+        "children": [
+            {
+                "name": ".github",
+                "type": "directory",
+                "children": [
+                    {
+                        "name": "workflows",
+                        "type": "directory",
+                        "children": [
+                            {
+                                "name": "azure-static-web-apps-orange-sky-032d7b10f.yml",
+                                "type": "file"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Dockerfile",
+                "type": "file"
+            },
+            {
+                "name": "Image",
+                "type": "directory",
+                "children": [
+                    {
+                        "name": "Base.png",
+                        "type": "file"
+                    },
+                    {
+                        "name": "VisualSim.afdesign",
+                        "type": "file"
+                    },
+                    {
+                        "name": "VisualSim.afdesign~lock~",
+                        "type": "file"
+                    }
+                ]
+            },
+            {
+                "name": "LICENSE",
+                "type": "file"
+            },
+            {
+                "name": "Readme.md",
+                "type": "file"
+            },
+            {
+                "name": "app",
+                "type": "directory",
+                "children": [
+                    {
+                        "name": ".gitignore",
+                        "type": "file"
+                    },
+                    {
+                        "name": "README.md",
+                        "type": "file"
+                    },
+                    {
+                        "name": "bun.lockb",
+                        "type": "file"
+                    },
+                    {
+                        "name": "index.html",
+                        "type": "file"
+                    },
+                    {
+                        "name": "package-lock.json",
+                        "type": "file"
+                    },
+                    {
+                        "name": "package.json",
+                        "type": "file"
+                    },
+                    {
+                        "name": "postcss.config.js",
+                        "type": "file"
+                    },
+                    {
+                        "name": "public",
+                        "type": "directory",
+                        "children": [
+                            {
+                                "name": "Base.png",
+                                "type": "file"
+                            },
+                            {
+                                "name": "add",
+                                "type": "directory",
+                                "children": [
+                                    {
+                                        "name": "add1.png",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "add2.png",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "add3.png",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "add4.png",
+                                        "type": "file"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "addi",
+                                "type": "directory",
+                                "children": [
+                                    {
+                                        "name": "addi1.png",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "addi2.png",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "addi3.png",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "addi4.png",
+                                        "type": "file"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "bne",
+                                "type": "directory",
+                                "children": [
+                                    {
+                                        "name": "bne3.png",
+                                        "type": "file"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "components",
+                                "type": "directory",
+                                "children": [
+                                    {
+                                        "name": "ALU.svg",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "AluControl.svg",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "Control.svg",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "InstructionRegister.svg",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "MUX2Bits.svg",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "MUX3Bits.svg",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "MUX4Bits.svg",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "Memory.svg",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "PC.svg",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "Puerta_And.svg",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "Puerta_OR.svg",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "Registers.svg",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "ShiftLeft2.svg",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "SignExtend.svg",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "Target.svg",
+                                        "type": "file"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "lw",
+                                "type": "directory",
+                                "children": [
+                                    {
+                                        "name": "lw1.png",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "lw2.png",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "lw3.png",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "lw4.png",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "lw5.png",
+                                        "type": "file"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "sw",
+                                "type": "directory",
+                                "children": [
+                                    {
+                                        "name": "sw1.png",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "sw2.png",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "sw3.png",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "sw4.png",
+                                        "type": "file"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "vite.svg",
+                                "type": "file"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "src",
+                        "type": "directory",
+                        "children": [
+                            {
+                                "name": "App.css",
+                                "type": "file"
+                            },
+                            {
+                                "name": "App.jsx",
+                                "type": "file"
+                            },
+                            {
+                                "name": "Components",
+                                "type": "directory",
+                                "children": [
+                                    {
+                                        "name": "Debugger",
+                                        "type": "directory",
+                                        "children": [
+                                            {
+                                                "name": "Debugger.css",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "Debugger.jsx",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "index.js",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "utils",
+                                                "type": "directory",
+                                                "children": [
+                                                    {
+                                                        "name": "controlButtons.css",
+                                                        "type": "file"
+                                                    },
+                                                    {
+                                                        "name": "controlButtons.jsx",
+                                                        "type": "file"
+                                                    },
+                                                    {
+                                                        "name": "debuggerInfo.jsx",
+                                                        "type": "file"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "name": "DropArea",
+                                        "type": "directory",
+                                        "children": [
+                                            {
+                                                "name": "DropArea.css",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "DropArea.jsx",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "index.js",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "utils",
+                                                "type": "directory",
+                                                "children": [
+                                                    {
+                                                        "name": "handleDrop.js",
+                                                        "type": "file"
+                                                    },
+                                                    {
+                                                        "name": "preventDefaults.js",
+                                                        "type": "file"
+                                                    },
+                                                    {
+                                                        "name": "setIsHighlight.js",
+                                                        "type": "file"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "name": "SimulationTables",
+                                        "type": "directory",
+                                        "children": [
+                                            {
+                                                "name": "SimulationTables.jsx",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "Simulationtables.css",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "index.js",
+                                                "type": "file"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "name": "index.js",
+                                        "type": "file"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "MipsApps",
+                                "type": "directory",
+                                "children": [
+                                    {
+                                        "name": "CanvasContext",
+                                        "type": "directory",
+                                        "children": [
+                                            {
+                                                "name": "CanvasContext.tsx",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "index.tsx",
+                                                "type": "file"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "name": "CanvasManager",
+                                        "type": "directory",
+                                        "children": [
+                                            {
+                                                "name": "CanvasManager.css",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "CanvasManager.tsx",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "Components",
+                                                "type": "directory",
+                                                "children": [
+                                                    {
+                                                        "name": "CanvasArrow",
+                                                        "type": "directory",
+                                                        "children": [
+                                                            {
+                                                                "name": "CanvasArrow.tsx",
+                                                                "type": "file"
+                                                            },
+                                                            {
+                                                                "name": "index.tsx",
+                                                                "type": "file"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "name": "CanvasElement",
+                                                        "type": "directory",
+                                                        "children": [
+                                                            {
+                                                                "name": "CanvasElement.tsx",
+                                                                "type": "file"
+                                                            },
+                                                            {
+                                                                "name": "index.tsx",
+                                                                "type": "file"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "name": "Control",
+                                                        "type": "directory",
+                                                        "children": [
+                                                            {
+                                                                "name": "Control.tsx",
+                                                                "type": "file"
+                                                            },
+                                                            {
+                                                                "name": "index.ts",
+                                                                "type": "file"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "name": "InstructionRegister",
+                                                        "type": "directory",
+                                                        "children": [
+                                                            {
+                                                                "name": "IntructionRegister.tsx",
+                                                                "type": "file"
+                                                            },
+                                                            {
+                                                                "name": "index.ts",
+                                                                "type": "file"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "name": "Memory",
+                                                        "type": "directory",
+                                                        "children": [
+                                                            {
+                                                                "name": "Memory.tsx",
+                                                                "type": "file"
+                                                            },
+                                                            {
+                                                                "name": "index.ts",
+                                                                "type": "file"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "name": "Registers",
+                                                        "type": "directory",
+                                                        "children": [
+                                                            {
+                                                                "name": "Registers.tsx",
+                                                                "type": "file"
+                                                            },
+                                                            {
+                                                                "name": "index.ts",
+                                                                "type": "file"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "name": "index.ts",
+                                                        "type": "file"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "name": "index.tsx",
+                                                "type": "file"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "name": "MipsApps.css",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "MipsApps.jsx",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "MipsAppsWithImages",
+                                        "type": "directory",
+                                        "children": [
+                                            {
+                                                "name": "ImageManager.css",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "ImageManager.tsx",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "PopUpBase",
+                                                "type": "directory",
+                                                "children": [
+                                                    {
+                                                        "name": "PopUpBase.css",
+                                                        "type": "file"
+                                                    },
+                                                    {
+                                                        "name": "PopUpBase.tsx",
+                                                        "type": "file"
+                                                    },
+                                                    {
+                                                        "name": "index.ts",
+                                                        "type": "file"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "name": "index.ts",
+                                                "type": "file"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "name": "index.js",
+                                        "type": "file"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "index.css",
+                                "type": "file"
+                            },
+                            {
+                                "name": "main.jsx",
+                                "type": "file"
+                            },
+                            {
+                                "name": "model",
+                                "type": "directory",
+                                "children": [
+                                    {
+                                        "name": "Ids.enum.ts",
+                                        "type": "file"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "utils",
+                                "type": "directory",
+                                "children": [
+                                    {
+                                        "name": "ALUResultStore.js",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "DebuggerFunctions.js",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "ImageSelector.ts",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "TranslatorFunctions.js",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "UtilityFunctions.js",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "UtilsVariablesFuntion.ts",
+                                        "type": "file"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "name": "tailwind.config.js",
+                        "type": "file"
+                    },
+                    {
+                        "name": "vite.config.js",
+                        "type": "file"
+                    }
+                ]
+            },
+            {
+                "name": "versionDelProfe",
+                "type": "directory",
+                "children": [
+                    {
+                        "name": "app",
+                        "type": "directory",
+                        "children": [
+                            {
+                                "name": "index.html",
+                                "type": "file"
+                            },
+                            {
+                                "name": "script.js",
+                                "type": "file"
+                            },
+                            {
+                                "name": "styles.css",
+                                "type": "file"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "images": []
+}

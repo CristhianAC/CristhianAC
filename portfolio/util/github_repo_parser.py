@@ -74,17 +74,17 @@ class GitHubRepoParser:
         return str(filepath.relative_to('src/config'))
     
 def main():
-    parser = GitHubRepoParser("")
+    parser = GitHubRepoParser()
     
     # Example project details
     project_json = parser.create_project_json(
-        owner='aabdoo23', #dont forget to change this to your github username
-        repo='portfolio', #dont forget to change this to your github repo name
-        title='Portfolio (This Website)', #dont forget to change this to your project title
-        description='An open source interactive portfolio website, with a clean and modern design, sections for education, experience, skills, competitions, and more. Built with Astro.js, Tailwind CSS, TypeScript, React, and Vercel.', #dont forget to change this to your project description
-        repo_url='https://github.com/aabdoo23/portfolio', #dont forget to change this to your github repo url
-        live_url='https://aabdoo23.vercel.app', #dont forget to change this to your live website url or leave it blank if you dont have one
-        tech_stack=['Astro.js', 'Tailwind CSS', 'TypeScript', 'React', 'Vercel'] #dont forget to change this to your project tech stack
+        owner='CristhianAC', #dont forget to change this to your github username
+        repo='Artemisa2.0', #dont forget to change this to your github repo name
+        title='Artemisa2.0', #dont forget to change this to your project title
+        description='A app wit IA and data visualization for random forest model and animal categorization', #dont forget to change this to your project description
+        repo_url='https://github.com/CristhianAC/Artemisa2.0', #dont forget to change this to your github repo url
+        live_url='https://cristhianAC.dev', #dont forget to change this to your live website url or leave it blank if you dont have one
+        tech_stack=[ 'Xaml', '.Net', 'Maui'] #dont forget to change this to your project tech stack
     )
 
     # Save project JSON and get the path
