@@ -15,7 +15,7 @@ export const userConfig = {
   // Social Links
   social: {
     github: "https://github.com/CristhianAC",
-    linkedin: "www.linkedin.com/in/cristhianac", // Add your LinkedIn URL
+    linkedin: "https://www.linkedin.com/in/cristhianac", // Add your LinkedIn URL
   },
 
   // Contact Information
