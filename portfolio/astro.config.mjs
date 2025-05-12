@@ -5,7 +5,8 @@ import react from '@astrojs/react';
 
 import sitemap from '@astrojs/sitemap';
 
-import cloudflare from '@astrojs/cloudflare';
+
+import vercelAdapter from '@astrojs/vercel';
 
 export default defineConfig({
   // Replace with your website URL (required for sitemap generation)
@@ -33,7 +34,7 @@ export default defineConfig({
 
   // Deployment configuration
   output: 'server', // Server-side rendering - required for OpenAI API usage
-  adapter: cloudflare(), // Deploy to Vercel - optional
+  adapter: vercelAdapter(), // Deploy to Vercel - optional
   devToolbar: {
     enabled: false,
   },
