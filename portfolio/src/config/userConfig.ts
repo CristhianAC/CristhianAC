@@ -1,5 +1,6 @@
 import cristhianAC from "./projects/cristhianac.json";
 import mips from "./projects/mipsvisualsim.json";
+import ngx_gaia_gis from "./projects/ngx-gaia-gis.json";
 export const userConfig = {
   // Personal Information
   name: "Cristhian Agamez",
@@ -258,6 +259,7 @@ export const userConfig = {
   projects: [
     cristhianAC,
     mips,
+    ngx_gaia_gis,
     // Add more projects here
   ],
 } as const;

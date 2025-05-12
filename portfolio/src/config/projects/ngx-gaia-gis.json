@@ -1,0 +1,411 @@
+{
+    "id": "ngx-gaia-gis",
+    "title": "ngx-gaia-gis",
+    "description": "A library for GIS professionals, simplifying the use of GIS data formats and map creation.",
+    "repoUrl": "https://github.com/Olympus-Analytics/ngx-gaia-gis",
+    "liveUrl": "https://cristhianAC.dev",
+    "techStack": [
+        "Angular",
+        "Typescript"
+    ],
+    "structure": {
+        "root": "ngx-gaia-gis",
+        "children": [
+            {
+                "name": ".editorconfig",
+                "type": "file"
+            },
+            {
+                "name": ".gitignore",
+                "type": "file"
+            },
+            {
+                "name": ".vscode",
+                "type": "directory",
+                "children": [
+                    {
+                        "name": "extensions.json",
+                        "type": "file"
+                    },
+                    {
+                        "name": "launch.json",
+                        "type": "file"
+                    },
+                    {
+                        "name": "tasks.json",
+                        "type": "file"
+                    }
+                ]
+            },
+            {
+                "name": "Brand",
+                "type": "directory",
+                "children": [
+                    {
+                        "name": "Logo.afdesign",
+                        "type": "file"
+                    }
+                ]
+            },
+            {
+                "name": "CONTRIBUTE.md",
+                "type": "file"
+            },
+            {
+                "name": "LICENSE.txt",
+                "type": "file"
+            },
+            {
+                "name": "README.md",
+                "type": "file"
+            },
+            {
+                "name": "angular.json",
+                "type": "file"
+            },
+            {
+                "name": "bun.lockb",
+                "type": "file"
+            },
+            {
+                "name": "documentation",
+                "type": "directory",
+                "children": [
+                    {
+                        "name": ".gitignore",
+                        "type": "file"
+                    },
+                    {
+                        "name": ".vscode",
+                        "type": "directory",
+                        "children": [
+                            {
+                                "name": "extensions.json",
+                                "type": "file"
+                            },
+                            {
+                                "name": "launch.json",
+                                "type": "file"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "README.md",
+                        "type": "file"
+                    },
+                    {
+                        "name": "astro.config.mjs",
+                        "type": "file"
+                    },
+                    {
+                        "name": "package-lock.json",
+                        "type": "file"
+                    },
+                    {
+                        "name": "package.json",
+                        "type": "file"
+                    },
+                    {
+                        "name": "public",
+                        "type": "directory",
+                        "children": [
+                            {
+                                "name": "favicon.svg",
+                                "type": "file"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "src",
+                        "type": "directory",
+                        "children": [
+                            {
+                                "name": "assets",
+                                "type": "directory",
+                                "children": [
+                                    {
+                                        "name": "houston.webp",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "light-logo.webp",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "logo.webp",
+                                        "type": "file"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "content",
+                                "type": "directory",
+                                "children": [
+                                    {
+                                        "name": "config.ts",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "docs",
+                                        "type": "directory",
+                                        "children": [
+                                            {
+                                                "name": "advanced-usage",
+                                                "type": "directory",
+                                                "children": [
+                                                    {
+                                                        "name": "gaia-gis-service.md",
+                                                        "type": "file"
+                                                    },
+                                                    {
+                                                        "name": "methods.md",
+                                                        "type": "file"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "name": "getting-started",
+                                                "type": "directory",
+                                                "children": [
+                                                    {
+                                                        "name": "configurations.md",
+                                                        "type": "file"
+                                                    },
+                                                    {
+                                                        "name": "getting-started.md",
+                                                        "type": "file"
+                                                    },
+                                                    {
+                                                        "name": "maps-styles.md",
+                                                        "type": "file"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "name": "index.mdx",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "installation",
+                                                "type": "directory",
+                                                "children": [
+                                                    {
+                                                        "name": "installation.md",
+                                                        "type": "file"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "env.d.ts",
+                                "type": "file"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "tsconfig.json",
+                        "type": "file"
+                    }
+                ]
+            },
+            {
+                "name": "package-lock.json",
+                "type": "file"
+            },
+            {
+                "name": "package.json",
+                "type": "file"
+            },
+            {
+                "name": "projects",
+                "type": "directory",
+                "children": [
+                    {
+                        "name": "demo",
+                        "type": "directory",
+                        "children": [
+                            {
+                                "name": "public",
+                                "type": "directory",
+                                "children": [
+                                    {
+                                        "name": "favicon.ico",
+                                        "type": "file"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "src",
+                                "type": "directory",
+                                "children": [
+                                    {
+                                        "name": "app",
+                                        "type": "directory",
+                                        "children": [
+                                            {
+                                                "name": "app.component.css",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "app.component.html",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "app.component.ts",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "app.config.ts",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "name": "app.routes.ts",
+                                                "type": "file"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "name": "index.html",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "main.ts",
+                                        "type": "file"
+                                    },
+                                    {
+                                        "name": "styles.css",
+                                        "type": "file"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "tsconfig.app.json",
+                                "type": "file"
+                            },
+                            {
+                                "name": "tsconfig.spec.json",
+                                "type": "file"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "gaia-gis",
+                        "type": "directory",
+                        "children": [
+                            {
+                                "name": ".gitignore",
+                                "type": "file"
+                            },
+                            {
+                                "name": "README.md",
+                                "type": "file"
+                            },
+                            {
+                                "name": "assets",
+                                "type": "directory",
+                                "children": [
+                                    {
+                                        "name": "ping.png",
+                                        "type": "file"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "ng-package.json",
+                                "type": "file"
+                            },
+                            {
+                                "name": "package-lock.json",
+                                "type": "file"
+                            },
+                            {
+                                "name": "package.json",
+                                "type": "file"
+                            },
+                            {
+                                "name": "src",
+                                "type": "directory",
+                                "children": [
+                                    {
+                                        "name": "lib",
+                                        "type": "directory",
+                                        "children": [
+                                            {
+                                                "name": "gaia-gis",
+                                                "type": "directory",
+                                                "children": [
+                                                    {
+                                                        "name": "gaia-gis.component.css",
+                                                        "type": "file"
+                                                    },
+                                                    {
+                                                        "name": "gaia-gis.component.html",
+                                                        "type": "file"
+                                                    },
+                                                    {
+                                                        "name": "gaia-gis.component.ts",
+                                                        "type": "file"
+                                                    },
+                                                    {
+                                                        "name": "gaia-gis.service.ts",
+                                                        "type": "file"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "name": "interfaces",
+                                                "type": "directory",
+                                                "children": [
+                                                    {
+                                                        "name": "MapDesignsGaia.model.ts",
+                                                        "type": "file"
+                                                    },
+                                                    {
+                                                        "name": "OptionsGaia.model.ts",
+                                                        "type": "file"
+                                                    },
+                                                    {
+                                                        "name": "PointGaia.model.ts",
+                                                        "type": "file"
+                                                    },
+                                                    {
+                                                        "name": "index.ts",
+                                                        "type": "file"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "name": "public-api.ts",
+                                        "type": "file"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "tsconfig.lib.json",
+                                "type": "file"
+                            },
+                            {
+                                "name": "tsconfig.lib.prod.json",
+                                "type": "file"
+                            },
+                            {
+                                "name": "tsconfig.spec.json",
+                                "type": "file"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "tsconfig.json",
+                "type": "file"
+            }
+        ]
+    },
+    "images": []
+}
