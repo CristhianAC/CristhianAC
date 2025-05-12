@@ -3,9 +3,11 @@ import { FaGithub, FaExternalLinkAlt, FaFolder, FaFile, FaChevronLeft, FaLink } 
 import { userConfig } from '../../config/userConfig';
 import DraggableWindow from './DraggableWindow';
 
+type FileNodeType = 'file' | 'directory';
+
 type FileNode = {
   name: string;
-  type: 'file' | 'directory';
+  type: FileNodeType;
   children?: readonly FileNode[];
 };
 
@@ -14,7 +16,19 @@ type ProjectStructure = {
   children: readonly FileNode[];
 };
 
-type Project = typeof userConfig.projects[0];
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  repoUrl: string;
+  liveUrl?: string;
+  techStack: string[];
+  structure: {
+    root: string;
+    children: any[]; // Use any[] to handle the structure from userConfig
+  };
+  images: { url: string; alt: string; description?: string }[];
+}
 
 interface GitHubViewerProps {
   isOpen: boolean;
@@ -193,7 +207,7 @@ const GitHubViewer = ({ isOpen, onClose }: GitHubViewerProps) => {
                 <div className="bg-gray-800/50 rounded-lg p-4">
                   <h3 className="text-xl font-semibold mb-4 text-gray-200">Project Structure</h3>
                   <div className="font-mono text-sm">
-                    {selectedProject && renderProjectStructure(selectedProject.structure as unknown as ProjectStructure)}
+                    {selectedProject && renderProjectStructure(selectedProject.structure)}
                   </div>
                 </div>
                 

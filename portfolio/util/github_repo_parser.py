@@ -74,7 +74,7 @@ class GitHubRepoParser:
         return str(filepath.relative_to('src/config'))
     
 def main():
-    parser = GitHubRepoParser()
+    parser = GitHubRepoParser("")
     
     # Example project details
     project_json = parser.create_project_json(
