@@ -2,8 +2,10 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@astrojs/react';
-import vercel from '@astrojs/vercel';
+
 import sitemap from '@astrojs/sitemap';
+
+import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
   // Replace with your website URL (required for sitemap generation)
@@ -31,7 +33,7 @@ export default defineConfig({
 
   // Deployment configuration
   output: 'server', // Server-side rendering - required for OpenAI API usage
-  adapter: vercel(), // Deploy to Vercel - optional
+  adapter: cloudflare(), // Deploy to Vercel - optional
   devToolbar: {
     enabled: false,
   },
