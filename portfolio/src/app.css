@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;700;900&family=Source+Code+Pro:wght@400;600&display=swap');
+
+:root {
+	--red: #bf0000;
+	--red-lift: #e01a1a;
+	--red-deep: #8f0000;
+	--ink: #08070a;
+	--paper: #f4f2ef;
+	--font-display: 'Red Hat Display', sans-serif;
+	--font-mono: 'Source Code Pro', monospace;
+}
+
+html,
+body {
+	margin: 0;
+	background: var(--ink);
+	color: var(--paper);
+	font-family: var(--font-display);
+}
+
+img {
+	image-rendering: pixelated;
+}
