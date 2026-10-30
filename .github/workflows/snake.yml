@@ -22,6 +22,13 @@ jobs:
             dist/github-snake.svg?palette=github&color_snake=#BF0000
             dist/github-snake-dark.svg?palette=github-dark&color_snake=#E01A1A&color_dots=#161b22,#4a0a0a,#8f0000,#bf0000,#f5433c
 
+      - name: Cache profile cards
+        run: |
+          sudo chown -R "$(id -u):$(id -g)" dist
+          fetch() { curl -fsSL -m 60 "$2" -o "dist/$1" || curl -fsSL "https://raw.githubusercontent.com/${{ github.repository }}/output/$1" -o "dist/$1" || true; }
+          fetch trophies.svg "https://github-trophies.vercel.app/?username=${{ github.repository_owner }}&theme=darkhub&no-frame=true&no-bg=true&margin-w=6&column=-1"
+          fetch stats.svg "https://github-readme-stats-one-bice.vercel.app/api?username=${{ github.repository_owner }}&show_icons=true&include_all_commits=true&hide_border=true&bg_color=08070a&title_color=E01A1A&icon_color=E01A1A&text_color=f2ede8&ring_color=E01A1A"
+
       - name: Publish to output branch
         run: |
           sudo chown -R "$(id -u):$(id -g)" dist
