@@ -67,28 +67,31 @@
 </script>
 
 <section class="stage" class:live={compiled >= total} data-era={era} style:--progress={progress}>
-	<div class="layer far" aria-hidden="true"></div>
-	<div class="layer floor" aria-hidden="true"></div>
-	<div class="layer beams" aria-hidden="true"><i></i><i></i></div>
-	<div class="layer set" aria-hidden="true">
-		{#each pieces as p, i (i)}
-			<svg
-				class="piece {p.name} {i < compiled ? 'compiled' : 'wireframe'}"
-				class:front={p.depth === 'front'}
-				viewBox="0 0 {p.w} {p.h}"
-				shape-rendering="crispEdges"
-				style:left="{p.x}%"
-				style:top="{p.y}%"
-				style:width="{p.size}%"
-			>
-				{#each p.px as [x, y, w, h, tone], j (j)}
-					<rect {x} {y} width={w} height={h} class={tone} />
-				{/each}
-			</svg>
-		{/each}
+	<!-- Backdrop: one transform target for camera shake and glitch, so the interactive content never moves. -->
+	<div class="backdrop" aria-hidden="true">
+		<div class="layer far" aria-hidden="true"></div>
+		<div class="layer floor" aria-hidden="true"></div>
+		<div class="layer beams" aria-hidden="true"><i></i><i></i></div>
+		<div class="layer set" aria-hidden="true">
+			{#each pieces as p, i (i)}
+				<svg
+					class="piece {p.name} {i < compiled ? 'compiled' : 'wireframe'}"
+					class:front={p.depth === 'front'}
+					viewBox="0 0 {p.w} {p.h}"
+					shape-rendering="crispEdges"
+					style:left="{p.x}%"
+					style:top="{p.y}%"
+					style:width="{p.size}%"
+				>
+					{#each p.px as [x, y, w, h, tone], j (j)}
+						<rect {x} {y} width={w} height={h} class={tone} />
+					{/each}
+				</svg>
+			{/each}
+		</div>
+		<div class="layer fx" aria-hidden="true"></div>
+		<div class="layer vignette" aria-hidden="true"></div>
 	</div>
-	<div class="layer fx" aria-hidden="true"></div>
-	<div class="layer vignette" aria-hidden="true"></div>
 	<!-- Content sits above the era overlays so text stays crisp. -->
 	<div class="content">
 		{@render children?.()}
@@ -106,6 +109,7 @@
 		min-height: clamp(420px, 78svh, 760px);
 		background: var(--ink);
 	}
+	.backdrop,
 	.layer {
 		position: absolute;
 		inset: 0;

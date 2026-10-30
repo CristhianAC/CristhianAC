@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { tick, untrack } from 'svelte';
+	import { onDestroy, tick, untrack } from 'svelte';
 	import { playSfx, setEra, stopMusic, unlock } from '$lib/audio/sound';
 	import { assemble, burst, flash, glitch, hitStop, pushIn, reduced, shake, shrug, wipe } from '$lib/motion/fx';
 	import { t, ui, type L } from '$lib/i18n';
@@ -35,12 +35,14 @@
 	const ended = $derived(game.finished || (phase === 'play' && q.kind === 'cta'));
 	const number = $derived(game.answered.length + 1);
 
+	const promptText = $derived(q.kind === 'truefalse' ? t(q.statement, lang) : t(q.prompt, lang));
+
 	const hostLine = $derived.by(() => {
 		if (ended && q.kind === 'cta') return t(q.prompt, lang);
 		if (phase === 'intro') return t(ui.hostWelcome, lang);
 		if (phase === 'title') return t(ui.hostChapter, lang);
 		if (phase === 'result') return t(correct ? ui.hostRight : ui.hostWrong, lang);
-		return t(q.kind === 'truefalse' ? q.statement : q.prompt, lang);
+		return promptText;
 	});
 
 	const eyebrow = $derived(`${round.code} · ${t(ui.question, lang)} ${number}/${TOTAL}`);
@@ -51,41 +53,55 @@
 	let flashEl = $state<HTMLElement>();
 	let fxEl = $state<HTMLElement>();
 	const stageEl = () => document.querySelector<HTMLElement>('[data-era]');
+	// Shake and glitch move the backdrop and the host only, never the interactive panel.
+	const scenery = () => [document.querySelector('[data-era] > .backdrop'), hostEl];
 
 	// The curtain fully covers the stage at 45% of the wipe; the screen swaps behind it at that cut.
 	const WIPE = 520;
 	const CUT = Math.round(WIPE * 0.45);
-	let cutting = false;
+	const SETTLE = 300; // the new title card ignores clicks this long after the swap
+	let cutting = $state(false);
+	let seq = 0; // bumps on every screen change; delayed juice checks it is still on its screen
+	let impactTimer: ReturnType<typeof setTimeout> | undefined;
+	let settleTimer: ReturnType<typeof setTimeout> | undefined;
+	onDestroy(() => {
+		clearTimeout(impactTimer);
+		clearTimeout(settleTimer);
+	});
 
 	// Each screen marks its heading with data-focus; moving focus there announces the new screen.
 	// Focus moves right after the swap. Only a chapter change waits, for the curtain (CUT ≈ 234 ms < 300 ms);
-	// clicks during that wait are ignored so a double click cannot start two cuts.
+	// clicks during the cut and the first SETTLE ms of the card are ignored, so a double click cannot skip it.
 	async function go(next: typeof phase) {
 		if (cutting) return;
+		seq++;
+		let wiped = false;
 		if (next === 'title') {
 			setEra(round.era);
 			void playSfx('whoosh');
-			if (wipe(wipeEl, WIPE)) {
+			wiped = !!wipe(wipeEl, WIPE);
+			if (wiped) {
 				cutting = true;
 				await new Promise((done) => setTimeout(done, CUT));
-				cutting = false;
 			}
 		}
 		phase = next;
 		reveal = null;
 		await tick();
 		document.querySelector<HTMLElement>('[data-focus]')?.focus();
+		if (wiped) settleTimer = setTimeout(() => (cutting = false), SETTLE);
 		if (next === 'title') chapterImpact();
 		else if (next === 'play' && !ended) pushIn(hostEl);
 	}
 
 	// Large tier: as the curtain uncovers, the CAP-0N letters slam in; hit + chapter and a shake land with them.
 	function chapterImpact() {
-		setTimeout(
+		clearTimeout(impactTimer);
+		impactTimer = setTimeout(
 			() => {
 				void playSfx('hit');
 				void playSfx('chapter');
-				shake(stageEl(), 0.6);
+				for (const el of scenery()) shake(el, 0.6);
 			},
 			reduced() ? 0 : 90
 		);
@@ -100,7 +116,9 @@
 
 	// Medium tier. Correct: freeze frame, flash, the new set piece builds with a pixel burst.
 	async function compiledJuice() {
+		const screen = seq;
 		await hitStop(stageEl(), 80, '.panel'); // freeze the set and effects; the panel UI keeps moving
+		if (screen !== seq) return; // the player already moved on
 		flash(flashEl);
 		void playSfx('correct');
 		burstFrom(document.querySelectorAll('.piece')[game.answered.length - 1], { count: 14 });
@@ -108,7 +126,7 @@
 	// Wrong: soft glitch and a host shrug; the anecdote card slides in on its own.
 	function failedJuice() {
 		void playSfx('wrong');
-		glitch(stageEl());
+		for (const el of scenery()) glitch(el);
 		shrug(hostEl?.querySelector('img'));
 	}
 
@@ -116,6 +134,7 @@
 		const asked = q;
 		const result = submit(rounds, game, r);
 		game = result.state;
+		lastSelect = performance.now();
 		void playSfx('select');
 		if (asked.kind === 'cta') return; // the end screen stays; the link opens in a new tab
 		correct = result.correct;
@@ -148,7 +167,10 @@
 		lastHover = now;
 		void playSfx('ui-hover', { volume: 0.5 });
 	}
+	// An answer click already plays `select` (its handler runs before this document listener).
+	let lastSelect = -Infinity;
 	function onClick(e: MouseEvent) {
+		if (performance.now() - lastSelect < 50) return;
 		if ((e.target as Element).closest?.('.qbtn')) void playSfx('ui-click');
 	}
 
@@ -217,7 +239,13 @@
 						{#each round.code as ch, i (i)}<span class="ch" aria-hidden="true">{ch}</span>{/each}
 					</h2>
 					<p class="round-name" use:assemble={{ delay: 300 }}>{t(round.title, lang)}</p>
-					<button type="button" class="qbtn primary" use:assemble={{ delay: 380 }} onclick={() => go('play')}>{t(ui.continue, lang)}</button>
+					<button
+						type="button"
+						class="qbtn primary"
+						disabled={cutting}
+						use:assemble={{ delay: 380 }}
+						onclick={() => go('play')}
+					>{t(ui.continue, lang)}</button>
 				{:else if phase === 'result'}
 					{#if correct}
 						<h2 class="ok" tabindex="-1" data-focus use:assemble={{ preset: 'climb' }}>{t(ui.compiled, lang)}</h2>
@@ -236,10 +264,14 @@
 					>
 						{#each eyebrow.split(' ') as w, i (i)}<span class="w" aria-hidden="true">{w}</span>{' '}{/each}
 					</h2>
+					<!-- Kinetic copy of the prompt; assistive tech reads the mechanic's own (visually hidden) prompt. -->
+					<p class="kinetic-prompt" aria-hidden="true" use:assemble={{ selector: '.w', preset: 'kinetic', step: 30, delay: 60 }}>
+						{#each promptText.split(' ') as w, i (i)}<span class="w">{w}</span>{' '}{/each}
+					</p>
 					<div
 						class="mechanic"
 						data-kind={q.kind}
-						use:assemble={{ selector: ':scope > :not(.prompt) > *', step: 45, delay: 150 }}
+						use:assemble={{ selector: ':scope > :not(.prompt) > *', step: 45, delay: 280 }}
 					>
 						{#if q.kind === 'choice'}
 							<Choice question={q} {lang} removed={game.removed} onanswer={answer} />
@@ -346,6 +378,13 @@
 	.fx-flash {
 		background: var(--paper);
 		opacity: 0;
+	}
+	.kinetic-prompt {
+		margin: 0 0 1rem;
+		font-size: 1.15rem;
+		font-weight: 700;
+		line-height: 1.35;
+		color: var(--paper);
 	}
 	.w,
 	.ch {

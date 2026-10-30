@@ -94,6 +94,7 @@ export function unlock(): void {
 			sfx.connect(master);
 			master.connect(ctx.destination);
 			graph = { ctx, master, music, duck, sfx };
+			watchResume();
 			applyMute();
 			for (const name of sfxNames) void load(name);
 			if (wanted) void startTrack(wanted);
@@ -102,6 +103,17 @@ export function unlock(): void {
 	} catch {
 		graph = null;
 	}
+}
+
+/** Browsers suspend (or on iOS "interrupt") the context in the background: resume when visible or on the next gesture. */
+function watchResume(): void {
+	const resume = () => {
+		if (!graph || graph.ctx.state === 'running' || document.visibilityState !== 'visible') return;
+		graph.ctx.resume().catch(() => {});
+	};
+	document.addEventListener('visibilitychange', resume);
+	window.addEventListener('pointerdown', resume, true);
+	window.addEventListener('keydown', resume, true);
 }
 
 function duckMusic(seconds: number): void {
@@ -126,6 +138,10 @@ export async function playSfx(name: SfxName, opts: { pitch?: number; volume?: nu
 	const gain = ctx.createGain();
 	gain.gain.value = opts.volume ?? 1;
 	src.connect(gain).connect(sfx);
+	src.onended = () => {
+		src.disconnect();
+		gain.disconnect();
+	};
 	if (DUCKERS.has(name)) duckMusic(buffer.duration);
 	src.start();
 }
@@ -135,6 +151,10 @@ function fadeOut(p: Playing, seconds: number): void {
 	p.gain.gain.cancelScheduledValues(now);
 	p.gain.gain.setValueAtTime(p.gain.gain.value, now);
 	p.gain.gain.linearRampToValueAtTime(0, now + seconds);
+	p.src.onended = () => {
+		p.src.disconnect();
+		p.gain.disconnect();
+	};
 	p.src.stop(now + seconds + 0.05);
 }
 

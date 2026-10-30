@@ -34,10 +34,17 @@
 		return () => cancelAnimationFrame(raf);
 	});
 
+	// Skip the typing on an activation key or a press on the stage; never on Tab, shortcuts or header clicks.
 	const skip = () => (shown = line.length);
+	function skipKey(e: KeyboardEvent) {
+		if (!e.ctrlKey && !e.metaKey && !e.altKey && ['Enter', ' ', 'Escape'].includes(e.key)) skip();
+	}
+	function skipPointer(e: PointerEvent) {
+		if ((e.target as Element | null)?.closest?.('[data-era]')) skip();
+	}
 </script>
 
-<svelte:window onkeydown={skip} onpointerdown={skip} />
+<svelte:window onkeydown={skipKey} onpointerdown={skipPointer} />
 
 <figure class="host" class:talking>
 	<!-- Live region stays mounted so screen readers announce each new line. -->
