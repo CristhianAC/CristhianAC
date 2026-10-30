@@ -69,3 +69,18 @@ export const ui: Record<string, L> = {
 	},
 	playAgain: { es: 'Jugar de nuevo', en: 'Play again' }
 };
+
+/** What the host says while a question is on the panel (the question itself is only on the panel). */
+export const presenterLines: L[] = [
+	{ es: 'Pregunta {n}. Sin presión… bueno, un poco.', en: 'Question {n}. No pressure… well, a little.' },
+	{ es: 'Atentos, que esta compila.', en: 'Eyes up, this one compiles.' },
+	{ es: '¿Lo sabes o le preguntamos al patito?', en: 'Do you know it, or ask the duck?' },
+	{ es: 'Vamos con la {n}.', en: 'On to number {n}.' },
+	{ es: 'Sin Stack Overflow para esta.', en: 'No Stack Overflow for this one.' },
+	{ es: 'Piénsalo bien. El deploy no espera.', en: "Think it through. The deploy won't wait." },
+	{ es: 'Cámara uno, pregunta en pantalla.', en: 'Camera one, question on screen.' }
+];
+
+/** Line for the 0-based question index: cycles in order, so consecutive questions never repeat. */
+export const presenterLine = (index: number, lang: Locale): string =>
+	t(presenterLines[index % presenterLines.length], lang).replace('{n}', String(index + 1));

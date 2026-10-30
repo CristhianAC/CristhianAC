@@ -1,4 +1,6 @@
 import { expect, test } from '@playwright/test';
+import { rounds } from '../src/lib/content/rounds';
+import { presenterLine } from '../src/lib/i18n';
 
 test.use({ reducedMotion: 'reduce' });
 
@@ -110,7 +112,7 @@ for (const [width, height] of [[390, 844], [1280, 800]]) {
 	});
 }
 
-test('with motion the typewriter types each new line and the prompt assembles word by word', async ({ browser }) => {
+test('with motion the typewriter types the presenter line and the prompt assembles word by word', async ({ browser }) => {
 	const context = await browser.newContext({ reducedMotion: 'no-preference' });
 	const page = await context.newPage();
 	await page.goto('/es');
@@ -119,9 +121,14 @@ test('with motion the typewriter types each new line and the prompt assembles wo
 	const rest = page.locator('.bubble .typed .rest');
 	await expect(rest).not.toHaveText(''); // still typing right after the line appears
 	await expect(rest).toHaveText(''); // and it finishes
-	// The visible prompt is split into words for the stagger; assistive tech reads the mechanic's own prompt.
-	const words = page.locator('.kinetic-prompt .w');
-	expect(await words.count()).toBeGreaterThan(3);
-	await expect(page.locator('.kinetic-prompt')).toHaveAttribute('aria-hidden', 'true');
+	// The host speaks a presenter line; the question is only on the panel, split into words for the stagger.
+	const prompt = (rounds[0].questions[0] as { prompt: { es: string } }).prompt.es;
+	await expect(page.locator('.bubble .sr-only')).toHaveText(presenterLine(0, 'es'));
+	await expect(page.locator('.bubble')).not.toContainText(prompt);
+	expect(await page.locator('.kinetic-prompt .w').count()).toBeGreaterThan(3);
+	// One accessible copy: the panel's sr-only text; the word spans and the mechanic's own prompt are hidden.
+	await expect(page.locator('.kinetic-prompt .sr-only')).toHaveText(prompt);
+	await expect(page.locator('.kinetic-prompt .w').first().locator('..')).toHaveAttribute('aria-hidden', 'true');
+	await expect(page.locator('.mechanic .prompt')).toBeHidden();
 	await context.close();
 });

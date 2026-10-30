@@ -2,7 +2,7 @@
 	import { onDestroy, tick, untrack } from 'svelte';
 	import { playSfx, setEra, stopMusic, unlock } from '$lib/audio/sound';
 	import { assemble, burst, flash, glitch, hitStop, pushIn, reduced, shake, shrug, wipe } from '$lib/motion/fx';
-	import { t, ui, type L } from '$lib/i18n';
+	import { presenterLine, t, ui, type L } from '$lib/i18n';
 	import { rounds } from '$lib/content/rounds';
 	import { createGame, current, stage, submit, useLifeline, type Lifeline, type Response } from '$lib/game/engine';
 	import Stage from '$lib/components/stage/Stage.svelte';
@@ -42,7 +42,7 @@
 		if (phase === 'intro') return t(ui.hostWelcome, lang);
 		if (phase === 'title') return t(ui.hostChapter, lang);
 		if (phase === 'result') return t(correct ? ui.hostRight : ui.hostWrong, lang);
-		return promptText;
+		return presenterLine(number - 1, lang); // the question itself is only on the panel
 	});
 
 	const eyebrow = $derived(`${round.code} · ${t(ui.question, lang)} ${number}/${TOTAL}`);
@@ -264,9 +264,10 @@
 					>
 						{#each eyebrow.split(' ') as w, i (i)}<span class="w" aria-hidden="true">{w}</span>{' '}{/each}
 					</h2>
-					<!-- Kinetic copy of the prompt; assistive tech reads the mechanic's own (visually hidden) prompt. -->
-					<p class="kinetic-prompt" aria-hidden="true" use:assemble={{ selector: '.w', preset: 'kinetic', step: 30, delay: 60 }}>
-						{#each promptText.split(' ') as w, i (i)}<span class="w">{w}</span>{' '}{/each}
+					<!-- The only copy of the question: assistive tech reads the sr-only text, the word spans are visual. -->
+					<p class="kinetic-prompt" use:assemble={{ selector: '.w', preset: 'kinetic', step: 30, delay: 60 }}>
+						<span class="sr-only">{promptText}</span>
+						<span aria-hidden="true">{#each promptText.split(' ') as w, i (i)}<span class="w">{w}</span>{' '}{/each}</span>
 					</p>
 					<div
 						class="mechanic"
@@ -400,14 +401,10 @@
 			0 0 0 2px var(--ink),
 			0 0 0 4px var(--red-deep);
 	}
-	/* The host reads the prompt aloud in the bubble; keep the mechanic's copy for screen readers only. */
+	/* The panel's kinetic prompt (or, on the end screen, the host's bubble) carries the question; hiding the
+	   mechanic's own copy keeps it to one accessible source. */
 	.mechanic :global(.prompt) {
-		position: absolute;
-		width: 1px;
-		height: 1px;
-		overflow: hidden;
-		clip-path: inset(50%);
-		white-space: nowrap;
+		display: none;
 	}
 	.panel :global([data-focus]:focus) {
 		outline: none;
