@@ -53,12 +53,6 @@ const cristhian = {
 
 Plus **Odoo** (ERP, modules, integrations) and **Remotion** for code-driven video.
 
-### 📈 Activity
-
-<div align="center">
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=CristhianAC&bg_color=08070a&color=f2ede8&line=e01a1a&point=f5433c&area=true&area_color=bf0000&hide_border=true" alt="Contribution graph" />
-</div>
-
 ---
 
 <div align="center">
