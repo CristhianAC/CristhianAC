@@ -12,7 +12,7 @@
 	let { question, lang, onanswer }: Props = $props();
 	let done = false;
 
-	// Never preventDefault: the link must still navigate.
+	// Never preventDefault: the link must still navigate (in a new tab, so the finished show stays).
 	function pick(i: number) {
 		if (done) return;
 		done = true;
@@ -23,7 +23,7 @@
 <p class="prompt">{t(question.prompt, lang)}</p>
 <div class="list">
 	{#each question.ctas as cta, i}
-		<a class="qbtn primary" href={cta.href} onclick={() => pick(i)}>{t(cta.label, lang)}</a>
+		<a class="qbtn primary" href={cta.href} target="_blank" rel="noopener noreferrer" onclick={() => pick(i)}>{t(cta.label, lang)}</a>
 	{/each}
 </div>
 

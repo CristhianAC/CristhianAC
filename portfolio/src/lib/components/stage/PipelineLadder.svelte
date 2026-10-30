@@ -53,7 +53,7 @@
 		align-items: center;
 		gap: 0.6rem;
 		padding: 0.35rem 0;
-		color: rgb(244 242 239 / 0.4);
+		color: rgb(244 242 239 / 0.6); /* ≥4.5:1 on the ladder background */
 	}
 	/* Commit graph rail between nodes. */
 	li:not(:last-child)::before {

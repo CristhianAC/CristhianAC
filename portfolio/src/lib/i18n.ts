@@ -36,5 +36,28 @@ export const ui: Record<string, L> = {
 	pickRight: { es: 'Elige su pareja', en: 'Pick its match' },
 	lifelineDuck: { es: 'Patito de goma', en: 'Rubber duck' },
 	lifelineReadme: { es: 'Leer el README', en: 'Read the README' },
-	lifelineBlame: { es: 'git blame', en: 'git blame' }
+	lifelineBlame: { es: 'git blame', en: 'git blame' },
+	showTitle: { es: 'EN VIVO DESDE PRODUCCIÓN', en: 'LIVE FROM PRODUCTION' },
+	showTagline: {
+		es: 'Un quiz show sobre cómo un niño de 11 años terminó desplegando a producción.',
+		en: 'A quiz show about how an 11-year-old ended up deploying to production.'
+	},
+	start: { es: 'Empezar', en: 'Start' },
+	continue: { es: 'Seguir', en: 'Continue' },
+	question: { es: 'Pregunta', en: 'Question' },
+	lifelines: { es: 'Comodines', en: 'Lifelines' },
+	compiled: { es: '¡Compilado! Pieza desbloqueada.', en: 'Compiled! Piece unlocked.' },
+	buildFailed: { es: 'Build fallido. El show sigue.', en: 'Build failed. The show goes on.' },
+	hostRight: { es: '¡Eso es! Otra pieza del set compila.', en: "That's it! Another piece of the set compiles." },
+	hostWrong: { es: 'Casi. Pero eso me recuerda una historia…', en: 'Close. But that reminds me of a story…' },
+	hostChapter: { es: 'Siguiente capítulo.', en: 'Next chapter.' },
+	blameReveal: {
+		es: 'git blame: esas dos opciones fueron culpa de otro.',
+		en: 'git blame: those two options were someone else’s fault.'
+	},
+	system: {
+		es: 'Deploy completado. El set está en producción y el host espera tu mensaje.',
+		en: 'Deploy complete. The set is live in production and the host is waiting for your message.'
+	},
+	playAgain: { es: 'Jugar de nuevo', en: 'Play again' }
 };
