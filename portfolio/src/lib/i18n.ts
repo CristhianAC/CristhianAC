@@ -16,6 +16,8 @@ export const ui: Record<string, L> = {
 	recruiter: { es: 'Modo reclutador', en: 'Recruiter mode' },
 	recruiterTitle: { es: 'Cristhian Agamez | Modo reclutador', en: 'Cristhian Agamez | Recruiter mode' },
 	switchLang: { es: 'English', en: 'Español' },
+	soundOn: { es: 'Sonido: activado', en: 'Sound: on' },
+	soundOff: { es: 'Sonido: desactivado', en: 'Sound: off' },
 	present: { es: 'presente', en: 'present' },
 	experience: { es: 'Experiencia', en: 'Experience' },
 	projects: { es: 'Proyectos', en: 'Projects' },

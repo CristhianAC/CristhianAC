@@ -4,6 +4,7 @@
 	import RecruiterButton from '$lib/components/RecruiterButton.svelte';
 	import { t, ui } from '$lib/i18n';
 	import LangSwitch from '$lib/components/LangSwitch.svelte';
+	import SoundToggle from '$lib/components/SoundToggle.svelte';
 
 	let { data, children } = $props();
 	const path = $derived(page.url.pathname.slice(data.lang.length + 1));
@@ -32,6 +33,7 @@
 	<nav aria-label={t(ui.navLabel, data.lang)}>
 		<RecruiterButton lang={data.lang} />
 		<LangSwitch lang={data.lang} {path} />
+		<SoundToggle lang={data.lang} />
 	</nav>
 </header>
 
@@ -44,6 +46,7 @@
 	nav {
 		display: flex;
 		justify-content: flex-end;
+		align-items: center;
 		gap: 1rem;
 	}
 	header :global(a) {

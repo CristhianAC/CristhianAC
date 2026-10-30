@@ -53,3 +53,13 @@ test('sitemap lists the 4 pages and excludes cv', async ({ request }) => {
 	for (const p of pages) expect(body).toContain(`<loc>${ORIGIN}${p}</loc>`);
 	expect(body).not.toContain('/cv');
 });
+
+test('sound toggle flips its accessible name and persists across reloads', async ({ page }) => {
+	await page.goto('/es');
+	await page.getByRole('button', { name: 'Sonido: activado' }).click();
+	await expect(page.getByRole('button', { name: 'Sonido: desactivado' })).toBeVisible();
+	await page.goto('/en');
+	await expect(page.getByRole('button', { name: 'Sound: off' })).toBeVisible();
+	await page.getByRole('button', { name: 'Sound: off' }).click();
+	await expect(page.getByRole('button', { name: 'Sound: on' })).toBeVisible();
+});
