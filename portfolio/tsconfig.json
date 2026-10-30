@@ -1,14 +1,5 @@
 {
-  "extends": "astro/tsconfigs/strict",
-  "include": [
-    ".astro/types.d.ts",
-    "**/*"
-  ],
-  "exclude": [
-    "dist"
-  ],
-  "compilerOptions": {
-    "jsx": "react-jsx",
-    "jsxImportSource": "react"
-  }
+	"extends": "./.svelte-kit/tsconfig.json",
+	"compilerOptions": { "strict": true },
+	"include": ["src", "e2e", "vite.config.ts", "playwright.config.ts"]
 }

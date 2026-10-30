@@ -1,38 +1,37 @@
 {
-  "name": "macos-terminal-portfolio",
-  "type": "module",
-  "version": "0.0.1",
-  "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
-  "dependencies": {
-    "@astrojs/cloudflare": "^12.5.2",
-    "@astrojs/react": "^4.2.7",
-    "@astrojs/sitemap": "^3.3.0",
-    "@astrojs/vercel": "^8.1.4",
-    "@astrolib/seo": "^1.0.0-beta.8",
-    "@tailwindcss/vite": "^4.0.3",
-    "@types/prismjs": "^1.26.5",
-    "@types/react": "^19.0.8",
-    "@types/react-dom": "^19.0.3",
-    "@types/react-syntax-highlighter": "^15.5.13",
-    "@vercel/analytics": "^1.5.0",
-    "@vercel/speed-insights": "^1.2.0",
-    "astro": "^5.7.12",
-    "framer-motion": "^12.8.0",
-    "groq-sdk": "^0.19.0",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "react-icons": "^5.4.0",
-    "react-markdown": "^10.1.0",
-    "react-syntax-highlighter": "^15.6.1",
-    "shepherd.js": "^14.5.0",
-    "tailwindcss": "^4.0.3"
-  },
-  "devDependencies": {
-    "@types/next": "^8.0.7"
-  }
+	"name": "portfolio",
+	"private": true,
+	"version": "0.0.1",
+	"type": "module",
+	"engines": { "node": ">=22.13" },
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build",
+		"preview": "vite preview",
+		"prepare": "svelte-kit sync || echo ''",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"og": "npm run build && tsx scripts/build-og.ts",
+		"cv": "npm run build && tsx scripts/build-cv.ts",
+		"test:unit": "vitest",
+		"test": "npm run test:unit -- --run && npm run test:e2e",
+		"test:e2e": "playwright install && playwright test",
+		"audio": "python3 scripts/gen_audio.py"
+	},
+	"devDependencies": {
+		"@axe-core/playwright": "^4.14.0",
+		"@playwright/test": "^1.60.0",
+		"@sveltejs/adapter-static": "^3.0.10",
+		"@sveltejs/kit": "^2.70.3",
+		"@sveltejs/vite-plugin-svelte": "^6.2.4",
+		"@testing-library/svelte": "^5.4.2",
+		"@types/node": "^22.20.5",
+		"jsdom": "^29.1.1",
+		"svelte": "^5.57.1",
+		"svelte-check": "^4.6.0",
+		"tsx": "^4.23.15",
+		"typescript": "^6.0.3",
+		"vite": "^7.3.7",
+		"vitest": "^4.1.8"
+	}
 }
