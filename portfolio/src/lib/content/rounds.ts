@@ -217,7 +217,7 @@ export const rounds: Round[] = [
 					es: 'Febrero de 2024, cuando tenía 20 años.',
 					en: 'February 2024, when he was 20.'
 				},
-				unlocks: ['undercodes', 'undercodes-web']
+				unlocks: ['undercodes', 'undercodes-web', 'peer-tutor', 'pedagogy-diploma', 'sergio-arboleda']
 			},
 			{
 				id: 'p8',

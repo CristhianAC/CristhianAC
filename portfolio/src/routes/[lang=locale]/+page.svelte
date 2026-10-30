@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { tick } from 'svelte';
-	import { t, ui } from '$lib/i18n';
+	import { t, ui, type L } from '$lib/i18n';
 	import { rounds } from '$lib/content/rounds';
 	import { createGame, current, stage, submit, useLifeline, type Lifeline, type Response } from '$lib/game/engine';
 	import Stage from '$lib/components/stage/Stage.svelte';
@@ -24,9 +24,9 @@
 	let game = $state(createGame());
 	let phase = $state<'intro' | 'title' | 'play' | 'result'>('intro');
 	let correct = $state(false);
-	let anecdote = $state('');
+	let anecdote = $state<L>(ui.hostRight);
 	let unlocks = $state<string[]>([]);
-	let reveal = $state('');
+	let reveal = $state<L | null>(null);
 
 	const round = $derived(rounds[game.round]);
 	const q = $derived(current(rounds, game));
@@ -44,7 +44,7 @@
 	// Each screen marks its heading with data-focus; moving focus there announces the new screen.
 	async function go(next: typeof phase) {
 		phase = next;
-		reveal = '';
+		reveal = null;
 		await tick();
 		document.querySelector<HTMLElement>('[data-focus]')?.focus();
 	}
@@ -55,7 +55,7 @@
 		game = result.state;
 		if (asked.kind === 'cta') return; // the end screen stays; the link opens in a new tab
 		correct = result.correct;
-		anecdote = t(asked.anecdote, lang);
+		anecdote = asked.anecdote;
 		unlocks = asked.unlocks; // unlocked whether the answer was right or wrong
 		go('result');
 	}
@@ -67,7 +67,7 @@
 		const used = useLifeline(rounds, game, l);
 		if (!used) return;
 		game = used.state;
-		reveal = used.reveal.kind === 'text' ? t(used.reveal.text, lang) : t(ui.blameReveal, lang);
+		reveal = used.reveal.kind === 'text' ? used.reveal.text : ui.blameReveal;
 	}
 
 	function restart() {
@@ -81,19 +81,22 @@
 </svelte:head>
 
 <main>
+	<h1 class="sr-only">{t(ui.showTitle, lang)}</h1>
 	<Stage era={round.era} compiled={ended ? TOTAL : game.answered.length} total={TOTAL}>
 		<div class="set" class:intro={phase === 'intro'}>
 			<div class="host"><Host line={hostLine} talking={phase === 'play' && !ended} /></div>
 
 			<div class="panel">
 				{#if phase === 'intro'}
-					<h1 tabindex="-1" data-focus>{t(ui.showTitle, lang)}</h1>
+					<h2 class="show-title" tabindex="-1" data-focus>{t(ui.showTitle, lang)}</h2>
 					<p class="tagline">{t(ui.showTagline, lang)}</p>
 					<button type="button" class="qbtn primary" onclick={() => go('title')}>{t(ui.start, lang)}</button>
 				{:else if ended}
+					<p class="eyebrow">{round.code} · {t(ui.question, lang)} {TOTAL}/{TOTAL}</p>
 					<h2 class="system" tabindex="-1" data-focus>SYSTEM</h2>
 					<p class="mono">&gt; {t(ui.system, lang)}</p>
 					{#if q.kind === 'cta'}
+						<UnlockList ids={q.unlocks} {lang} />
 						<div class="mechanic" data-kind="cta"><CtaChoice question={q} {lang} onanswer={answer} /></div>
 					{/if}
 					<button type="button" class="qbtn again" onclick={restart}>{t(ui.playAgain, lang)}</button>
@@ -106,7 +109,7 @@
 					{#if correct}
 						<h2 class="ok" tabindex="-1" data-focus>{t(ui.compiled, lang)}</h2>
 					{:else}
-						<AnecdoteCard {anecdote} {lang} />
+						<AnecdoteCard anecdote={t(anecdote, lang)} {lang} />
 					{/if}
 					<UnlockList ids={unlocks} {lang} />
 					<button type="button" class="qbtn primary" onclick={advance}>{t(ui.continue, lang)}</button>
@@ -128,7 +131,7 @@
 						{/if}
 					</div>
 					<!-- Always mounted so screen readers announce text changes. -->
-					<p class="reveal" class:empty={!reveal} role="status">{reveal}</p>
+					<p class="reveal" class:empty={!reveal} role="status">{reveal ? t(reveal, lang) : ''}</p>
 					<section class="lifelines" aria-label={t(ui.lifelines, lang)}>
 						<Lifelines
 							used={game.used}
@@ -152,6 +155,14 @@
 </main>
 
 <style>
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip-path: inset(50%);
+		white-space: nowrap;
+	}
 	main {
 		display: grid;
 		grid-template-columns: minmax(0, 1fr) auto;
@@ -216,7 +227,7 @@
 		outline: none;
 	}
 
-	h1 {
+	.show-title {
 		margin: 0 0 0.75rem;
 		font-size: clamp(2rem, 6vw, 3.4rem);
 		font-weight: 900;

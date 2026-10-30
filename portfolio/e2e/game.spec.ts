@@ -56,6 +56,8 @@ for (const lang of ['es', 'en'] as Lang[]) {
 		}
 		expect(anecdotes).toBeGreaterThan(0);
 		await expect(page.getByRole('heading', { name: 'SYSTEM' })).toBeFocused();
+		await expect(page.getByRole('region', { name: c.unlocked })).toContainText('GitHub');
+		await expect(page.locator('h1')).toHaveCount(1);
 		await expect(page.locator('a[href="https://www.linkedin.com/in/cristhianac"]')).toBeVisible();
 		await expect(page.locator('a[href="https://undercodes.net"]')).toBeVisible();
 		const ladder = page.getByRole('navigation', { name: c.pipeline });

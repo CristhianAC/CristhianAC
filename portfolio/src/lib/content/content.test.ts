@@ -66,4 +66,13 @@ describe('content', () => {
 		const ids = questions.map((q) => q.id);
 		expect(new Set(ids).size).toBe(ids.length);
 	});
+
+	it('every project and CV role is unlocked by some question', () => {
+		const unlocked = new Set(questions.flatMap((q) => q.unlocks));
+		const ids = [
+			...projects.map((x) => x.id),
+			...[...profile.experience, ...profile.education, ...profile.teaching].map((x) => x.id)
+		];
+		expect(ids.filter((id) => !unlocked.has(id))).toEqual([]);
+	});
 });
