@@ -8,6 +8,7 @@
 	import PipelineLadder from '$lib/components/stage/PipelineLadder.svelte';
 	import Lifelines from '$lib/components/Lifelines.svelte';
 	import AnecdoteCard from '$lib/components/AnecdoteCard.svelte';
+	import UnlockList from '$lib/components/UnlockList.svelte';
 	import Choice from '$lib/components/mechanics/Choice.svelte';
 	import TrueFalse from '$lib/components/mechanics/TrueFalse.svelte';
 	import OrderTimeline from '$lib/components/mechanics/OrderTimeline.svelte';
@@ -24,6 +25,7 @@
 	let phase = $state<'intro' | 'title' | 'play' | 'result'>('intro');
 	let correct = $state(false);
 	let anecdote = $state('');
+	let unlocks = $state<string[]>([]);
 	let reveal = $state('');
 
 	const round = $derived(rounds[game.round]);
@@ -54,6 +56,7 @@
 		if (asked.kind === 'cta') return; // the end screen stays; the link opens in a new tab
 		correct = result.correct;
 		anecdote = t(asked.anecdote, lang);
+		unlocks = asked.unlocks; // unlocked whether the answer was right or wrong
 		go('result');
 	}
 
@@ -78,7 +81,7 @@
 </svelte:head>
 
 <main>
-	<Stage era={round.era} compiled={game.answered.length} total={TOTAL}>
+	<Stage era={round.era} compiled={ended ? TOTAL : game.answered.length} total={TOTAL}>
 		<div class="set" class:intro={phase === 'intro'}>
 			<div class="host"><Host line={hostLine} talking={phase === 'play' && !ended} /></div>
 
@@ -105,6 +108,7 @@
 					{:else}
 						<AnecdoteCard {anecdote} {lang} />
 					{/if}
+					<UnlockList ids={unlocks} {lang} />
 					<button type="button" class="qbtn primary" onclick={advance}>{t(ui.continue, lang)}</button>
 				{:else}
 					<h2 class="eyebrow" tabindex="-1" data-focus>
@@ -123,7 +127,8 @@
 							<MatchPairs question={q} {lang} onanswer={answer} />
 						{/if}
 					</div>
-					{#if reveal}<p class="reveal" role="status">{reveal}</p>{/if}
+					<!-- Always mounted so screen readers announce text changes. -->
+					<p class="reveal" class:empty={!reveal} role="status">{reveal}</p>
 					<section class="lifelines" aria-label={t(ui.lifelines, lang)}>
 						<Lifelines
 							used={game.used}
@@ -158,12 +163,14 @@
 		position: sticky;
 		top: 1rem;
 	}
-	@media (max-width: 860px) {
+	/* Below 1100px a side column would crowd the set: the ladder becomes a bar above the stage. */
+	@media (max-width: 1100px) {
 		main {
 			grid-template-columns: minmax(0, 1fr);
 		}
 		.ladder {
 			position: static;
+			order: -1;
 		}
 	}
 
@@ -272,6 +279,11 @@
 		font-size: 0.9rem;
 		background: var(--paper);
 		color: var(--ink);
+	}
+	/* Collapsed but still rendered: a display:none live region may not be announced. */
+	.reveal.empty {
+		margin: 0;
+		padding: 0;
 	}
 	.lifelines {
 		margin-top: 1.25rem;

@@ -96,6 +96,28 @@
 		color: var(--paper);
 	}
 
+	/* Matches the game page breakpoint, where the ladder becomes a slim bar above the stage. */
+	@media (max-width: 1100px) {
+		.ladder {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			gap: 0.25rem 1.25rem;
+			padding: 0.5rem 1rem;
+		}
+		.commits {
+			margin: 0;
+		}
+		ol {
+			flex-direction: row;
+			flex-wrap: wrap;
+			gap: 0 1rem;
+		}
+		li:not(:last-child)::before {
+			display: none;
+		}
+	}
+
 	@media (prefers-reduced-motion: no-preference) {
 		li.current .node {
 			animation: pulse 1.2s steps(2) infinite;

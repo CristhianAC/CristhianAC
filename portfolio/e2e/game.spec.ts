@@ -4,8 +4,8 @@ import type { Question } from '../src/lib/content/types';
 
 type Lang = 'es' | 'en';
 const copy = {
-	es: { start: 'Empezar', next: 'Seguir', confirm: 'Confirmar', compiled: /Compilado/, pipeline: 'Pipeline de despliegue', prod: 'producción' },
-	en: { start: 'Start', next: 'Continue', confirm: 'Confirm', compiled: /Compiled/, pipeline: 'Deployment pipeline', prod: 'production' }
+	es: { start: 'Empezar', next: 'Seguir', confirm: 'Confirmar', compiled: /Compilado/, pipeline: 'Pipeline de despliegue', prod: 'producción', unlocked: 'Desbloqueado en el set' },
+	en: { start: 'Start', next: 'Continue', confirm: 'Confirm', compiled: /Compiled/, pipeline: 'Deployment pipeline', prod: 'production', unlocked: 'Unlocked on set' }
 };
 
 // Picking the first available control: choice/truefalse depend on content; order starts reversed and
@@ -48,6 +48,9 @@ for (const lang of ['es', 'en'] as Lang[]) {
 				} else {
 					await expect(page.getByRole('heading', { name: c.compiled })).toBeVisible();
 				}
+				const unlocks = page.getByRole('region', { name: c.unlocked });
+				if (q.id === 'p7') await expect(unlocks).toContainText('UnderCodes');
+				if (q.unlocks.length === 0) await expect(unlocks).toHaveCount(0);
 				await page.getByRole('button', { name: c.next }).click();
 			}
 		}
@@ -57,6 +60,7 @@ for (const lang of ['es', 'en'] as Lang[]) {
 		await expect(page.locator('a[href="https://undercodes.net"]')).toBeVisible();
 		const ladder = page.getByRole('navigation', { name: c.pipeline });
 		await expect(ladder.locator('[aria-current="step"]')).toContainText(c.prod);
+		await expect(page.locator('.piece.compiled')).toHaveCount(12);
 	});
 }
 
@@ -70,3 +74,18 @@ test('git blame on P1 disables two options', async ({ page }) => {
 	await expect(choice.locator('button:disabled')).toHaveCount(2);
 	await expect(page.getByRole('button', { name: 'git blame' })).toBeDisabled();
 });
+
+for (const [width, height] of [[390, 844], [800, 600], [1024, 768], [1440, 900]]) {
+	test(`the pipeline ladder never overlaps the stage at ${width}px`, async ({ page }) => {
+		await page.setViewportSize({ width, height });
+		await page.goto('/es');
+		const ladder = (await page.getByRole('navigation', { name: 'Pipeline de despliegue' }).boundingBox())!;
+		const stage = (await page.locator('[data-era]').boundingBox())!;
+		const overlaps =
+			ladder.x < stage.x + stage.width &&
+			stage.x < ladder.x + ladder.width &&
+			ladder.y < stage.y + stage.height &&
+			stage.y < ladder.y + ladder.height;
+		expect(overlaps).toBe(false);
+	});
+}
