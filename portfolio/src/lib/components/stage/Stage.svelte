@@ -100,6 +100,8 @@
 		position: relative;
 		isolation: isolate;
 		overflow: hidden;
+		/* clip, unlike hidden, is not a scroll container: focus() can never scroll the set sideways. */
+		overflow: clip;
 		width: 100%;
 		min-height: clamp(420px, 78svh, 760px);
 		background: var(--ink);

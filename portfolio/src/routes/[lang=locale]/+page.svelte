@@ -52,29 +52,42 @@
 	let fxEl = $state<HTMLElement>();
 	const stageEl = () => document.querySelector<HTMLElement>('[data-era]');
 
+	// The curtain fully covers the stage at 45% of the wipe; the screen swaps behind it at that cut.
+	const WIPE = 520;
+	const CUT = Math.round(WIPE * 0.45);
+	let cutting = false;
+
 	// Each screen marks its heading with data-focus; moving focus there announces the new screen.
-	// Focus moves at once: the motion below never delays or blocks input.
+	// Focus moves right after the swap. Only a chapter change waits, for the curtain (CUT ≈ 234 ms < 300 ms);
+	// clicks during that wait are ignored so a double click cannot start two cuts.
 	async function go(next: typeof phase) {
+		if (cutting) return;
+		if (next === 'title') {
+			setEra(round.era);
+			void playSfx('whoosh');
+			if (wipe(wipeEl, WIPE)) {
+				cutting = true;
+				await new Promise((done) => setTimeout(done, CUT));
+				cutting = false;
+			}
+		}
 		phase = next;
 		reveal = null;
 		await tick();
 		document.querySelector<HTMLElement>('[data-focus]')?.focus();
-		if (next === 'title') chapterCut();
+		if (next === 'title') chapterImpact();
 		else if (next === 'play' && !ended) pushIn(hostEl);
 	}
 
-	// Large tier: whoosh + curtain wipe, then on the cut the CAP-0N letters slam in with hit + chapter and a shake.
-	function chapterCut() {
-		setEra(round.era);
-		void playSfx('whoosh');
-		wipe(wipeEl);
+	// Large tier: as the curtain uncovers, the CAP-0N letters slam in; hit + chapter and a shake land with them.
+	function chapterImpact() {
 		setTimeout(
 			() => {
 				void playSfx('hit');
 				void playSfx('chapter');
 				shake(stageEl(), 0.6);
 			},
-			reduced() ? 0 : 300
+			reduced() ? 0 : 90
 		);
 	}
 
@@ -87,7 +100,7 @@
 
 	// Medium tier. Correct: freeze frame, flash, the new set piece builds with a pixel burst.
 	async function compiledJuice() {
-		await hitStop(80);
+		await hitStop(stageEl(), 80, '.panel'); // freeze the set and effects; the panel UI keeps moving
 		flash(flashEl);
 		void playSfx('correct');
 		burstFrom(document.querySelectorAll('.piece')[game.answered.length - 1], { count: 14 });
@@ -171,6 +184,8 @@
 <main>
 	<h1 class="sr-only">{t(ui.showTitle, lang)}</h1>
 	<Stage era={round.era} compiled={ended ? TOTAL : game.answered.length} total={TOTAL}>
+		<!-- Particles sit behind the host and panel (the set is positioned and comes later); the curtain and flash cover everything. -->
+		<div class="fx-particles" bind:this={fxEl} aria-hidden="true"></div>
 		<div class="set" class:intro={phase === 'intro'}>
 			<div class="host" bind:this={hostEl}><Host line={hostLine} talking={phase === 'play' && !ended} /></div>
 
@@ -197,12 +212,12 @@
 						tabindex="-1"
 						data-focus
 						aria-label={round.code}
-						use:assemble={{ selector: '.ch', preset: 'slam', step: 40, delay: 220 }}
+						use:assemble={{ selector: '.ch', preset: 'slam', step: 40 }}
 					>
 						{#each round.code as ch, i (i)}<span class="ch" aria-hidden="true">{ch}</span>{/each}
 					</h2>
-					<p class="round-name" use:assemble={{ delay: 520 }}>{t(round.title, lang)}</p>
-					<button type="button" class="qbtn primary" use:assemble={{ delay: 600 }} onclick={() => go('play')}>{t(ui.continue, lang)}</button>
+					<p class="round-name" use:assemble={{ delay: 300 }}>{t(round.title, lang)}</p>
+					<button type="button" class="qbtn primary" use:assemble={{ delay: 380 }} onclick={() => go('play')}>{t(ui.continue, lang)}</button>
 				{:else if phase === 'result'}
 					{#if correct}
 						<h2 class="ok" tabindex="-1" data-focus use:assemble={{ preset: 'climb' }}>{t(ui.compiled, lang)}</h2>
@@ -257,7 +272,6 @@
 		</div>
 		<div class="fx-wipe" bind:this={wipeEl} aria-hidden="true"></div>
 		<div class="fx-flash" bind:this={flashEl} aria-hidden="true"></div>
-		<div class="fx-particles" bind:this={fxEl} aria-hidden="true"></div>
 	</Stage>
 
 	<aside class="ladder">
@@ -297,6 +311,7 @@
 	}
 
 	.set {
+		position: relative;
 		display: grid;
 		grid-template-columns: auto minmax(0, 34rem);
 		justify-content: center;

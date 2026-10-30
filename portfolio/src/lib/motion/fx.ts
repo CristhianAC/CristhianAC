@@ -114,10 +114,13 @@ export const pop = (el: Element | null | undefined) =>
 export const pushIn = (el: Element | null | undefined) =>
 	run(el, [{ transform: 'scale(0.92) translateY(14px)' }, { transform: 'none' }], { duration: 600, easing: OUT });
 
-/** Hit-stop: freeze every running animation for `ms`, then resume. */
-export function hitStop(ms = 80): Promise<void> {
-	if (reduced() || typeof document === 'undefined' || !document.getAnimations) return Promise.resolve();
-	const frozen = document.getAnimations().filter((a) => a.playState === 'running');
+/** Hit-stop: freeze the running animations inside `root` for `ms`, except under `keep` (e.g. UI text), then resume. */
+export function hitStop(root: Element | null | undefined, ms = 80, keep?: string): Promise<void> {
+	if (reduced() || !root?.getAnimations) return Promise.resolve();
+	const frozen = root.getAnimations({ subtree: true }).filter((a) => {
+		const target = (a.effect as KeyframeEffect | null)?.target;
+		return a.playState === 'running' && !(keep && target?.closest(keep));
+	});
 	frozen.forEach((a) => a.pause());
 	return new Promise((done) =>
 		setTimeout(() => {

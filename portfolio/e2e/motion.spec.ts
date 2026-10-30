@@ -69,3 +69,44 @@ test('with motion the game still advances through a few questions', async ({ bro
 	await expect(page.getByRole('heading', { name: /Pregunta 4\// })).toBeVisible();
 	await context.close();
 });
+
+for (const [width, height] of [[390, 844], [1280, 800]]) {
+	test(`the host and bubble stay on screen after every transition at ${width}px`, async ({ browser }) => {
+		const context = await browser.newContext({ reducedMotion: 'no-preference', viewport: { width, height } });
+		const page = await context.newPage();
+		const settled = () =>
+			page.waitForFunction(() =>
+				document
+					.getAnimations()
+					.every((a) => a.playState !== 'running' || a.effect?.getComputedTiming().iterations === Infinity)
+			);
+		const onScreen = async (screen: string) => {
+			await settled();
+			// The stage clips, it must not be a scroll container: focus() used to scroll it sideways (timing
+			// dependent), which pushed the host and bubble off the left edge on every later screen.
+			const scrolled = await page.locator('[data-era]').evaluate((el) => {
+				el.scrollLeft = 400;
+				el.scrollTop = 400;
+				return [el.scrollLeft, el.scrollTop];
+			});
+			expect(scrolled, `stage scroll on ${screen}`).toEqual([0, 0]);
+			for (const sel of ['.bubble', '.host img']) {
+				const box = (await page.locator(sel).boundingBox())!;
+				expect(box.x, `${sel} left on ${screen}`).toBeGreaterThanOrEqual(0);
+				expect(box.x + box.width, `${sel} right on ${screen}`).toBeLessThanOrEqual(width);
+			}
+		};
+		await page.goto('/es');
+		await onScreen('intro');
+		await page.getByRole('button', { name: 'Empezar' }).click();
+		await expect(page.getByRole('heading', { name: 'CAP-01' })).toBeFocused();
+		await onScreen('title');
+		await page.getByRole('button', { name: 'Seguir' }).click();
+		await expect(page.getByRole('heading', { name: /Pregunta 1\// })).toBeFocused();
+		await onScreen('question');
+		await page.locator('[data-kind] button:enabled').first().click();
+		await expect(page.getByRole('button', { name: 'Seguir' })).toBeVisible();
+		await onScreen('result');
+		await context.close();
+	});
+}
