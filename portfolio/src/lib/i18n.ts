@@ -7,5 +7,18 @@ export const t = (value: L, lang: Locale): string => value[lang];
 
 /** UI strings; later tasks extend this map. */
 export const ui: Record<string, L> = {
-	title: { es: 'Cristhian Agamez | Portafolio', en: 'Cristhian Agamez | Portfolio' }
+	title: { es: 'Cristhian Agamez | Portafolio', en: 'Cristhian Agamez | Portfolio' },
+	recruiter: { es: 'Modo reclutador', en: 'Recruiter mode' },
+	recruiterTitle: { es: 'Cristhian Agamez | Modo reclutador', en: 'Cristhian Agamez | Recruiter mode' },
+	switchLang: { es: 'English', en: 'Español' },
+	present: { es: 'presente', en: 'present' },
+	experience: { es: 'Experiencia', en: 'Experience' },
+	projects: { es: 'Proyectos', en: 'Projects' },
+	education: { es: 'Educación', en: 'Education' },
+	teaching: { es: 'Docencia', en: 'Teaching' },
+	certificates: { es: 'Certificados', en: 'Certificates' },
+	skills: { es: 'Habilidades', en: 'Skills' },
+	awards: { es: 'Reconocimientos', en: 'Awards' },
+	contact: { es: 'Contacto', en: 'Contact' },
+	downloadCv: { es: 'Descargar CV (PDF)', en: 'Download CV (PDF)' }
 };
