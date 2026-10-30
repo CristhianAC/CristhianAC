@@ -8,6 +8,11 @@ export const t = (value: L, lang: Locale): string => value[lang];
 /** UI strings; later tasks extend this map. */
 export const ui: Record<string, L> = {
 	title: { es: 'Cristhian Agamez | Portafolio', en: 'Cristhian Agamez | Portfolio' },
+	description: {
+		es: 'Portafolio de Cristhian Agamez, desarrollador de software, presentado como un quiz show con anécdotas reales de su carrera.',
+		en: "Portfolio of Cristhian Agamez, software developer, presented as a quiz show with real stories from his career."
+	},
+	navLabel: { es: 'Navegación principal', en: 'Main navigation' },
 	recruiter: { es: 'Modo reclutador', en: 'Recruiter mode' },
 	recruiterTitle: { es: 'Cristhian Agamez | Modo reclutador', en: 'Cristhian Agamez | Recruiter mode' },
 	switchLang: { es: 'English', en: 'Español' },

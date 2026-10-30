@@ -38,7 +38,7 @@
 		font-size: 0.75rem;
 		letter-spacing: 0.08em;
 		text-transform: uppercase;
-		color: var(--red-lift);
+		color: #ff6b6b; /* red-lift is 4.1:1 on ink at this size; AA needs 4.5 */
 	}
 	ol {
 		list-style: none;
