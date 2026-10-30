@@ -1,0 +1,112 @@
+/* Era palettes: 8-bit constraint (cap01) grows into UnderCodes neon (final).
+   Ink background and red accent stay in every era. */
+
+.stage[data-era] {
+	--wall: #141218;
+	--wall-line: rgb(244 242 239 / 0.04);
+	--wall-glow: rgb(191 0 0 / 0.18);
+	--floor: #121016;
+	--floor-line: rgb(244 242 239 / 0.06);
+	--pool: rgb(244 242 239 / 0.14);
+	--beam: rgb(244 242 239 / 0.22);
+	--wire: rgb(244 242 239 / 0.28);
+	--set-a: #2a2630;
+	--set-b: #5a5560;
+	--set-c: var(--red);
+	--set-light: var(--paper);
+}
+
+/* CAP-01: four colors, dithered wall, heavy scanlines. */
+.stage[data-era='cap01'] {
+	--wall: #08070a;
+	--wall-line: rgb(191 0 0 / 0.08);
+	--wall-glow: rgb(191 0 0 / 0.12);
+	--pool: rgb(244 242 239 / 0.1);
+	--beam: rgb(244 242 239 / 0.14);
+	--set-a: #3a3540;
+	--set-b: #8a8590;
+	--set-light: #d8d4ce;
+	--fx:
+		repeating-linear-gradient(0deg, rgb(8 7 10 / 0.55) 0 1px, transparent 1px 3px),
+		repeating-conic-gradient(rgb(8 7 10 / 0.18) 0 25%, transparent 0 50%) 0 0 / 4px 4px;
+}
+.stage[data-era='cap01'] .set {
+	filter: saturate(0.6) contrast(1.15);
+}
+
+/* CAP-02: a second hue appears (early web blue). */
+.stage[data-era='cap02'] {
+	--wall: #0d1020;
+	--wall-line: rgb(90 110 170 / 0.08);
+	--set-a: #26304f;
+	--set-b: #6c7aa0;
+	--set-light: #c8d2e8;
+	--fx: repeating-linear-gradient(0deg, rgb(8 7 10 / 0.35) 0 1px, transparent 1px 3px);
+}
+
+/* CAP-03: design studio, amber and violet join the palette. */
+.stage[data-era='cap03'] {
+	--wall: #150f1f;
+	--wall-glow: rgb(160 90 220 / 0.18);
+	--set-a: #33284a;
+	--set-b: #8b6fb0;
+	--set-light: #f0b54a;
+	--beam: rgb(240 181 74 / 0.2);
+	--fx: repeating-linear-gradient(0deg, rgb(8 7 10 / 0.18) 0 1px, transparent 1px 4px);
+}
+
+/* CAP-04: UnderCodes is founded, brand red takes the set. */
+.stage[data-era='cap04'] {
+	--wall: #1a0c0e;
+	--wall-glow: rgb(191 0 0 / 0.3);
+	--wall-line: rgb(224 26 26 / 0.07);
+	--set-a: #241c22;
+	--set-b: #8f0000;
+	--set-c: var(--red-lift);
+	--set-light: #f4f2ef;
+	--beam: rgb(255 220 220 / 0.24);
+}
+
+/* CAP-05: Spain, warm key light. */
+.stage[data-era='cap05'] {
+	--wall: #1e1210;
+	--wall-glow: rgb(242 166 90 / 0.24);
+	--wall-line: rgb(242 166 90 / 0.06);
+	--floor: #1a1210;
+	--pool: rgb(255 200 140 / 0.2);
+	--beam: rgb(255 190 120 / 0.3);
+	--set-a: #3a2420;
+	--set-b: #c8553d;
+	--set-light: #f6c98a;
+}
+
+/* FINAL: UnderCodes neon, red bloom. */
+.stage[data-era='final'] {
+	--wall: #0b0507;
+	--wall-glow: rgb(224 26 26 / 0.4);
+	--wall-line: rgb(224 26 26 / 0.12);
+	--floor-line: rgb(224 26 26 / 0.14);
+	--pool: rgb(224 26 26 / 0.22);
+	--beam: rgb(255 60 60 / 0.3);
+	--wire: rgb(224 26 26 / 0.4);
+	--set-a: #16080b;
+	--set-b: var(--red-deep);
+	--set-c: var(--red-lift);
+	--set-light: #ff5a5a;
+}
+.stage[data-era='final'] .piece.compiled {
+	filter: drop-shadow(0 0 2px var(--red-lift)) drop-shadow(0 0 10px rgb(191 0 0 / 0.7));
+}
+.stage[data-era='final'] .piece.compiled.front {
+	filter: blur(0.6px) drop-shadow(0 0 6px rgb(191 0 0 / 0.6));
+}
+@media (prefers-reduced-motion: no-preference) {
+	.stage[data-era='final'] .piece.compiled.on-air {
+		animation: neon-hum 3s steps(1) infinite;
+	}
+}
+@keyframes neon-hum {
+	0%, 92%, 100% { opacity: 1; }
+	94% { opacity: 0.55; }
+	96% { opacity: 0.9; }
+}

@@ -20,5 +20,12 @@ export const ui: Record<string, L> = {
 	skills: { es: 'Habilidades', en: 'Skills' },
 	awards: { es: 'Reconocimientos', en: 'Awards' },
 	contact: { es: 'Contacto', en: 'Contact' },
-	downloadCv: { es: 'Descargar CV (PDF)', en: 'Download CV (PDF)' }
+	downloadCv: { es: 'Descargar CV (PDF)', en: 'Download CV (PDF)' },
+	pipeline: { es: 'Pipeline de despliegue', en: 'Deployment pipeline' },
+	commits: { es: 'commits', en: 'commits' },
+	production: { es: 'producción', en: 'production' },
+	hostWelcome: {
+		es: 'Bienvenidos a EN VIVO DESDE PRODUCCIÓN. El set todavía está compilando.',
+		en: 'Welcome to LIVE FROM PRODUCTION. The set is still compiling.'
+	}
 };
