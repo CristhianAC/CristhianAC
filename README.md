@@ -53,6 +53,14 @@ const cristhian = {
 
 Plus **Odoo** (ERP, modules, integrations) and **Remotion** for code-driven video.
 
+### 📈 Activity
+
+<div align="center">
+<img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=CristhianAC&theme=github_dark" alt="Contribution history" width="100%" />
+<br/><br/>
+<img src="https://streak-stats.demolab.com/?user=CristhianAC&background=08070a&ring=E01A1A&fire=E01A1A&currStreakNum=f2ede8&sideNums=f2ede8&currStreakLabel=E01A1A&sideLabels=a29a94&dates=6b656a&stroke=2b282b&hide_border=true" alt="Contribution streak" />
+</div>
+
 ---
 
 <div align="center">
