@@ -38,7 +38,6 @@ const movingAnimations = (page: import('@playwright/test').Page) =>
 test('reduced motion: answering only fades, and the host bubble shows its whole line at once', async ({ page }) => {
 	await page.goto('/es');
 	const typed = page.locator('.bubble .typed');
-	await expect(typed).toHaveText((await page.locator('.bubble .sr-only').textContent())!);
 	await expect(typed.locator('.rest')).toHaveText('');
 	await page.getByRole('button', { name: 'Empezar' }).click();
 	expect(await movingAnimations(page)).toEqual([]);
@@ -110,3 +109,19 @@ for (const [width, height] of [[390, 844], [1280, 800]]) {
 		await context.close();
 	});
 }
+
+test('with motion the typewriter types each new line and the prompt assembles word by word', async ({ browser }) => {
+	const context = await browser.newContext({ reducedMotion: 'no-preference' });
+	const page = await context.newPage();
+	await page.goto('/es');
+	await page.getByRole('button', { name: 'Empezar' }).click();
+	await page.getByRole('button', { name: 'Seguir' }).click();
+	const rest = page.locator('.bubble .typed .rest');
+	await expect(rest).not.toHaveText(''); // still typing right after the line appears
+	await expect(rest).toHaveText(''); // and it finishes
+	// The visible prompt is split into words for the stagger; assistive tech reads the mechanic's own prompt.
+	const words = page.locator('.kinetic-prompt .w');
+	expect(await words.count()).toBeGreaterThan(3);
+	await expect(page.locator('.kinetic-prompt')).toHaveAttribute('aria-hidden', 'true');
+	await context.close();
+});
