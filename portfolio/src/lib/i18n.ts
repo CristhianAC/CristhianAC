@@ -27,5 +27,14 @@ export const ui: Record<string, L> = {
 	hostWelcome: {
 		es: 'Bienvenidos a EN VIVO DESDE PRODUCCIÓN. El set todavía está compilando.',
 		en: 'Welcome to LIVE FROM PRODUCTION. The set is still compiling.'
-	}
+	},
+	true: { es: 'Verdadero', en: 'True' },
+	false: { es: 'Falso', en: 'False' },
+	confirm: { es: 'Confirmar', en: 'Confirm' },
+	moveUp: { es: 'Subir', en: 'Move up' },
+	moveDown: { es: 'Bajar', en: 'Move down' },
+	pickRight: { es: 'Elige su pareja', en: 'Pick its match' },
+	lifelineDuck: { es: 'Patito de goma', en: 'Rubber duck' },
+	lifelineReadme: { es: 'Leer el README', en: 'Read the README' },
+	lifelineBlame: { es: 'git blame', en: 'git blame' }
 };
