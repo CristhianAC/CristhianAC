@@ -50,7 +50,7 @@ export function submit(rounds: Round[], s: GameState, r: Response): { state: Gam
 	const correct = isCorrect(q, r);
 	const answered = [...s.answered, { id: q.id, correct }];
 	if (s.question + 1 < rounds[s.round].questions.length)
-		return { state: { ...s, answered, question: s.question + 1 }, correct };
+		return { state: { ...s, answered, question: s.question + 1, removed: [] }, correct };
 	if (s.round + 1 < rounds.length)
 		return { state: { ...s, answered, round: s.round + 1, question: 0, removed: [] }, correct };
 	return { state: { ...s, answered, removed: [], finished: true }, correct };

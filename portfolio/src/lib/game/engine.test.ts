@@ -71,6 +71,12 @@ describe('engine', () => {
 		expect(out2.reveal).toEqual({ kind: 'removed', options: [1, 2] });
 	});
 
+	it('clears blamed options on a same-round advance', () => {
+		const out = useLifeline(fixture, createGame(), 'blame')!;
+		const state = submit(fixture, out.state, 2).state;
+		expect(state.removed).toEqual([]);
+	});
+
 	it('blame on a non-choice question returns null', () => {
 		const s = { ...createGame(), question: 1 };
 		expect(useLifeline(fixture, s, 'blame')).toBeNull();
