@@ -60,11 +60,11 @@ Plus **Odoo** (ERP, modules, integrations) and **Remotion** for code-driven vide
 <br/><br/>
 <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=CristhianAC&theme=github_dark" alt="Contribution history" width="100%" />
 <br/><br/>
-<img src="https://raw.githubusercontent.com/CristhianAC/CristhianAC/output/stats.svg" alt="GitHub stats" height="180" />
-<img src="https://streak-stats.demolab.com/?user=CristhianAC&background=08070a&ring=E01A1A&fire=E01A1A&currStreakNum=f2ede8&sideNums=f2ede8&currStreakLabel=E01A1A&sideLabels=a29a94&dates=6b656a&stroke=2b282b&hide_border=true" alt="Contribution streak" height="180" />
+<img src="https://raw.githubusercontent.com/CristhianAC/CristhianAC/output/stats.svg" alt="GitHub stats" height="150" />
+<img src="https://streak-stats.demolab.com/?user=CristhianAC&background=08070a&ring=E01A1A&fire=E01A1A&currStreakNum=f2ede8&sideNums=f2ede8&currStreakLabel=E01A1A&sideLabels=a29a94&dates=6b656a&stroke=2b282b&hide_border=true" alt="Contribution streak" height="150" />
 <br/><br/>
-<img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=CristhianAC&theme=github_dark" alt="Top languages by repo" height="170" />
-<img src="https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=CristhianAC&theme=github_dark&utcOffset=-5" alt="Commits by hour" height="170" />
+<img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=CristhianAC&theme=github_dark" alt="Top languages by repo" height="150" />
+<img src="https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=CristhianAC&theme=github_dark&utcOffset=-5" alt="Commits by hour" height="150" />
 <br/><br/>
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/CristhianAC/CristhianAC/output/github-snake-dark.svg" />
