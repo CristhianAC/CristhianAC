@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { tick } from 'svelte';
 	import { t, ui, type Locale } from '$lib/i18n';
 	import type { Question } from '$lib/content/types';
 	import type { Response } from '$lib/game/engine';
@@ -21,16 +22,22 @@
 	let activeLeft = $state<number | null>(null);
 	let done = $state(false);
 	const complete = $derived(chosen.every((c) => c !== null));
+	let leftButtons = $state<HTMLButtonElement[]>([]);
+	let confirmButton = $state<HTMLButtonElement>();
 
 	function pickLeft(i: number) {
 		if (done) return;
 		chosen[i] = null; // re-selecting a left item frees its pairing
 		activeLeft = i;
 	}
-	function pickRight(j: number) {
+	async function pickRight(j: number) {
 		if (done || activeLeft === null) return;
 		chosen[activeLeft] = j;
 		activeLeft = null;
+		// The right column disables itself; hand focus to the next unpaired item (or Confirm).
+		await tick();
+		const next = chosen.indexOf(null);
+		(next === -1 ? confirmButton : leftButtons[next])?.focus();
 	}
 	function confirm() {
 		if (done || !complete) return;
@@ -47,6 +54,7 @@
 				<button
 					type="button"
 					class="qbtn"
+					bind:this={leftButtons[i]}
 					class:selected={activeLeft === i}
 					aria-pressed={activeLeft === i}
 					disabled={done}
@@ -73,7 +81,13 @@
 		{/each}
 	</ul>
 </div>
-<button type="button" class="qbtn primary" disabled={done || !complete} onclick={confirm}>{t(ui.confirm, lang)}</button>
+<button
+	type="button"
+	class="qbtn primary"
+	bind:this={confirmButton}
+	disabled={done || !complete}
+	onclick={confirm}
+>{t(ui.confirm, lang)}</button>
 
 <style>
 	.prompt {

@@ -67,6 +67,13 @@ describe('OrderTimeline', () => {
 		await fireEvent.click(screen.getByRole('button', { name: 'Confirmar' }));
 		expect(a).toHaveBeenCalledWith([0, 1, 2]);
 	});
+	it('keeps focus on the item when its move button disables itself', async () => {
+		render(OrderTimeline, { question, lang: 'es', onanswer: vi.fn() });
+		await fireEvent.click(screen.getByRole('button', { name: 'Subir: one' })); // [2,0,1]
+		expect(document.activeElement).toBe(screen.getByRole('button', { name: 'Subir: one' }));
+		await fireEvent.click(screen.getByRole('button', { name: 'Subir: one' })); // [0,2,1], "one" on top
+		expect(document.activeElement).toBe(screen.getByRole('button', { name: 'Bajar: one' }));
+	});
 });
 
 describe('SpotLine', () => {
@@ -104,6 +111,18 @@ describe('MatchPairs', () => {
 		await fireEvent.click(confirm);
 		expect(a).toHaveBeenCalledOnce();
 		expect(a).toHaveBeenCalledWith([0, 1, 2]);
+	});
+	it('moves focus to the next unpaired left item after picking a match', async () => {
+		render(MatchPairs, { question, lang: 'es', onanswer: vi.fn() });
+		await fireEvent.click(screen.getByRole('button', { name: 'L1' }));
+		await fireEvent.click(screen.getByRole('button', { name: 'R1' }));
+		expect(document.activeElement).toBe(screen.getByRole('button', { name: 'L0' }));
+		await fireEvent.click(screen.getByRole('button', { name: 'L0' }));
+		await fireEvent.click(screen.getByRole('button', { name: 'R0' }));
+		expect(document.activeElement).toBe(screen.getByRole('button', { name: 'L2' }));
+		await fireEvent.click(screen.getByRole('button', { name: 'L2' }));
+		await fireEvent.click(screen.getByRole('button', { name: 'R2' }));
+		expect(document.activeElement).toBe(screen.getByRole('button', { name: 'Confirmar' }));
 	});
 	it('shows the right column in a different order than the left', () => {
 		render(MatchPairs, { question, lang: 'es', onanswer: vi.fn() });

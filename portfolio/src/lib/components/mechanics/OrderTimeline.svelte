@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { tick } from 'svelte';
 	import { t, ui, type Locale } from '$lib/i18n';
 	import type { Question } from '$lib/content/types';
 	import type { Response } from '$lib/game/engine';
@@ -15,12 +16,24 @@
 	let order = $state(question.items.map((_, i) => i).reverse());
 	let done = $state(false);
 	let dragFrom = $state<number | null>(null);
+	let upButtons = $state<HTMLButtonElement[]>([]);
+	let downButtons = $state<HTMLButtonElement[]>([]);
 
 	function move(from: number, to: number) {
 		if (done || to < 0 || to >= order.length) return;
 		const next = [...order];
 		next.splice(to, 0, next.splice(from, 1)[0]);
 		order = next;
+	}
+	// Keyboard: keep focus on the moved item; at an edge its button disables, so use the other one.
+	async function step(pos: number, dir: -1 | 1) {
+		const item = order[pos];
+		move(pos, pos + dir);
+		await tick();
+		const at = order.indexOf(item);
+		const sameDirection = dir === -1 ? at > 0 : at < order.length - 1;
+		const up = dir === -1 ? sameDirection : !sameDirection;
+		(up ? upButtons : downButtons)[item]?.focus();
 	}
 	function confirm() {
 		if (done) return;
@@ -42,16 +55,18 @@
 			<button
 				type="button"
 				class="qbtn mini"
+				bind:this={upButtons[original]}
 				disabled={done || pos === 0}
 				aria-label="{t(ui.moveUp, lang)}: {t(question.items[original], lang)}"
-				onclick={() => move(pos, pos - 1)}>▲</button
+				onclick={() => step(pos, -1)}>▲</button
 			>
 			<button
 				type="button"
 				class="qbtn mini"
+				bind:this={downButtons[original]}
 				disabled={done || pos === order.length - 1}
 				aria-label="{t(ui.moveDown, lang)}: {t(question.items[original], lang)}"
-				onclick={() => move(pos, pos + 1)}>▼</button
+				onclick={() => step(pos, 1)}>▼</button
 			>
 		</li>
 	{/each}
