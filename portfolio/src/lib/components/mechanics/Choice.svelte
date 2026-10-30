@@ -22,7 +22,13 @@
 <p class="prompt">{t(question.prompt, lang)}</p>
 <div class="list">
 	{#each question.options as option, i}
-		<button type="button" class="qbtn" disabled={done || removed.includes(i)} onclick={() => pick(i)}>
+		<button
+			type="button"
+			class="qbtn"
+			class:struck={removed.includes(i)}
+			disabled={done || removed.includes(i)}
+			onclick={() => pick(i)}
+		>
 			{t(option, lang)}
 		</button>
 	{/each}
@@ -37,5 +43,32 @@
 		display: grid;
 		gap: 0.9rem;
 		padding: 4px;
+	}
+	/* git blame: ruled-out options get struck through. */
+	.struck {
+		position: relative;
+	}
+	.struck::after {
+		content: '';
+		position: absolute;
+		left: 0.6rem;
+		right: 0.6rem;
+		top: 50%;
+		height: 3px;
+		background: var(--red-lift);
+		transform-origin: 0 50%;
+	}
+	@media (prefers-reduced-motion: no-preference) {
+		.struck::after {
+			animation: strike 0.28s cubic-bezier(0.23, 1, 0.32, 1) backwards;
+		}
+		.struck ~ .struck::after {
+			animation-delay: 0.08s;
+		}
+	}
+	@keyframes strike {
+		from {
+			transform: scaleX(0);
+		}
 	}
 </style>

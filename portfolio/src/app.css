@@ -58,3 +58,14 @@ img {
 .qbtn.primary:hover:not(:disabled) {
 	background: var(--red-lift);
 }
+
+/* Press feedback: quick squeeze down, spring back on release. --ease-spring is set at runtime from the motion helpers. */
+@media (prefers-reduced-motion: no-preference) {
+	.qbtn {
+		transition: transform 0.45s var(--ease-spring, cubic-bezier(0.23, 1, 0.32, 1));
+	}
+	.qbtn:active:not(:disabled) {
+		transform: scale(0.96);
+		transition: transform 0.08s cubic-bezier(0.23, 1, 0.32, 1);
+	}
+}

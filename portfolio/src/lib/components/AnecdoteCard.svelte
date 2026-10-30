@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { t, ui, type Locale } from '$lib/i18n';
+	import { assemble } from '$lib/motion/fx';
 
 	let { anecdote, lang }: { anecdote: string; lang: Locale } = $props();
 </script>
 
-<article class="card">
+<article class="card" use:assemble={{ preset: 'slide' }}>
 	<h2 tabindex="-1" data-focus>{t(ui.buildFailed, lang)}</h2>
 	<p>{anecdote}</p>
 </article>

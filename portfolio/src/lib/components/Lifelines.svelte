@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { t, ui, type Locale } from '$lib/i18n';
 	import type { Lifeline } from '$lib/game/engine';
+	import { pop } from '$lib/motion/fx';
 
 	type Props = {
 		used: Lifeline[];
@@ -19,7 +20,7 @@
 
 <div class="lifelines">
 	{#each all as l}
-		<button type="button" class="qbtn" disabled={used.includes(l) || !available[l]} onclick={() => onuse(l)}>
+		<button type="button" class="qbtn" disabled={used.includes(l) || !available[l]} onclick={(e) => (pop(e.currentTarget), onuse(l))}>
 			{t(ui[labels[l]], lang)}
 		</button>
 	{/each}

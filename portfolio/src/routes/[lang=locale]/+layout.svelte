@@ -5,6 +5,8 @@
 	import { t, ui } from '$lib/i18n';
 	import LangSwitch from '$lib/components/LangSwitch.svelte';
 	import SoundToggle from '$lib/components/SoundToggle.svelte';
+	import { onMount } from 'svelte';
+	import { springCss } from '$lib/motion/fx';
 
 	let { data, children } = $props();
 	const path = $derived(page.url.pathname.slice(data.lang.length + 1));
@@ -12,6 +14,8 @@
 	const rest = $derived(page.url.pathname.slice(3));
 	const title = $derived(t(path === '/recruiter' ? ui.recruiterTitle : ui.title, data.lang));
 	const description = $derived(t(ui.description, data.lang));
+
+	onMount(() => document.documentElement.style.setProperty('--ease-spring', springCss()));
 </script>
 
 <svelte:head>

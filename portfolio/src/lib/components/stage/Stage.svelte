@@ -66,7 +66,7 @@
 	const progress = $derived(total > 0 ? Math.min(compiled / total, 1) : 0);
 </script>
 
-<section class="stage" data-era={era} style:--progress={progress}>
+<section class="stage" class:live={compiled >= total} data-era={era} style:--progress={progress}>
 	<div class="layer far" aria-hidden="true"></div>
 	<div class="layer floor" aria-hidden="true"></div>
 	<div class="layer beams" aria-hidden="true"><i></i><i></i></div>
@@ -80,7 +80,6 @@
 				style:left="{p.x}%"
 				style:top="{p.y}%"
 				style:width="{p.size}%"
-				style:--i={i}
 			>
 				{#each p.px as [x, y, w, h, tone], j (j)}
 					<rect {x} {y} width={w} height={h} class={tone} />
@@ -208,8 +207,38 @@
 		.wireframe rect {
 			animation: march 1.6s steps(5) infinite;
 		}
+		/* The newly compiled piece builds in pixel steps while it springs up from its base. */
 		.compiled {
-			animation: compile 0.6s steps(6) calc(var(--i) * 90ms) backwards;
+			transform-origin: 50% 100%;
+			animation:
+				compile 0.6s steps(6) backwards,
+				build 0.7s var(--ease-spring, cubic-bezier(0.23, 1, 0.32, 1)) backwards;
+		}
+		/* End of the show: the ON AIR sign flickers on (2 dips in ~0.9 s, under the 3 flashes/s limit). */
+		.live .on-air {
+			animation:
+				compile 0.6s steps(6) backwards,
+				flicker-on 0.9s steps(1) 0.3s backwards;
+		}
+	}
+	@keyframes build {
+		from {
+			transform: scale(0.85, 0.6);
+		}
+	}
+	@keyframes flicker-on {
+		0% {
+			opacity: 0.15;
+		}
+		20% {
+			opacity: 1;
+		}
+		45% {
+			opacity: 0.35;
+		}
+		60%,
+		100% {
+			opacity: 1;
 		}
 	}
 	@keyframes sway-left {

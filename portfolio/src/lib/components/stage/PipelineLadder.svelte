@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Stage as PipelineStage } from '$lib/game/engine';
 	import { t, ui, type Locale } from '$lib/i18n';
+	import { assemble } from '$lib/motion/fx';
 
 	let { stage, commits, lang }: { stage: PipelineStage; commits: number; lang: Locale } = $props();
 
@@ -10,7 +11,11 @@
 </script>
 
 <nav class="ladder" aria-label={t(ui.pipeline, lang)}>
-	<p class="commits">{commits} {t(ui.commits, lang)}</p>
+	<!-- Each new commit climbs into place with overshoot (not on first load: 0 commits). -->
+	<p class="commits">
+		{#key commits}<span class="count" use:assemble={commits > 0 ? { preset: 'climb' } : null}>{commits}</span>{/key}
+		{t(ui.commits, lang)}
+	</p>
 	<!-- DOM order build → producción; drawn bottom-up like a prize ladder. -->
 	<ol>
 		{#each STEPS as s, i (s)}
@@ -39,6 +44,9 @@
 		letter-spacing: 0.08em;
 		text-transform: uppercase;
 		color: #ff6b6b; /* red-lift is 4.1:1 on ink at this size; AA needs 4.5 */
+	}
+	.count {
+		display: inline-block;
 	}
 	ol {
 		list-style: none;

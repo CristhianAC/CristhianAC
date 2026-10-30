@@ -27,7 +27,9 @@ describe('Host', () => {
 		render(Host, { line: 'Bienvenidos al show', talking: true });
 		const img = screen.getByRole('img', { name: 'Cristhian' });
 		expect(img.getAttribute('src')).toBe('/sprites/host/south.png');
-		const bubble = screen.getByText('Bienvenidos al show');
+		// Screen readers get the full line in the live region; the typed copy is aria-hidden.
+		const bubble = screen.getByText('Bienvenidos al show', { selector: '.sr-only' });
 		expect(bubble.closest('[aria-live="polite"]')).toBeTruthy();
+		expect(document.querySelector('.typed')?.getAttribute('aria-hidden')).toBe('true');
 	});
 });

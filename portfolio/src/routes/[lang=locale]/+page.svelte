@@ -1,5 +1,7 @@
 <script lang="ts">
-	import { tick } from 'svelte';
+	import { tick, untrack } from 'svelte';
+	import { playSfx, setEra, stopMusic, unlock } from '$lib/audio/sound';
+	import { assemble, burst, flash, glitch, hitStop, pushIn, reduced, shake, shrug, wipe } from '$lib/motion/fx';
 	import { t, ui, type L } from '$lib/i18n';
 	import { rounds } from '$lib/content/rounds';
 	import { createGame, current, stage, submit, useLifeline, type Lifeline, type Response } from '$lib/game/engine';
@@ -41,23 +43,105 @@
 		return t(q.kind === 'truefalse' ? q.statement : q.prompt, lang);
 	});
 
+	const eyebrow = $derived(`${round.code} · ${t(ui.question, lang)} ${number}/${TOTAL}`);
+
+	// Juice targets: overlays inside the stage and the host column (visual pivots, never layout boxes).
+	let hostEl = $state<HTMLElement>();
+	let wipeEl = $state<HTMLElement>();
+	let flashEl = $state<HTMLElement>();
+	let fxEl = $state<HTMLElement>();
+	const stageEl = () => document.querySelector<HTMLElement>('[data-era]');
+
 	// Each screen marks its heading with data-focus; moving focus there announces the new screen.
+	// Focus moves at once: the motion below never delays or blocks input.
 	async function go(next: typeof phase) {
 		phase = next;
 		reveal = null;
 		await tick();
 		document.querySelector<HTMLElement>('[data-focus]')?.focus();
+		if (next === 'title') chapterCut();
+		else if (next === 'play' && !ended) pushIn(hostEl);
+	}
+
+	// Large tier: whoosh + curtain wipe, then on the cut the CAP-0N letters slam in with hit + chapter and a shake.
+	function chapterCut() {
+		setEra(round.era);
+		void playSfx('whoosh');
+		wipe(wipeEl);
+		setTimeout(
+			() => {
+				void playSfx('hit');
+				void playSfx('chapter');
+				shake(stageEl(), 0.6);
+			},
+			reduced() ? 0 : 300
+		);
+	}
+
+	function burstFrom(el: Element | undefined, opts: Parameters<typeof burst>[3]) {
+		if (!el || !fxEl) return;
+		const a = el.getBoundingClientRect();
+		const b = fxEl.getBoundingClientRect();
+		burst(fxEl, a.x + a.width / 2 - b.x, a.y + a.height / 2 - b.y, opts);
+	}
+
+	// Medium tier. Correct: freeze frame, flash, the new set piece builds with a pixel burst.
+	async function compiledJuice() {
+		await hitStop(80);
+		flash(flashEl);
+		void playSfx('correct');
+		burstFrom(document.querySelectorAll('.piece')[game.answered.length - 1], { count: 14 });
+	}
+	// Wrong: soft glitch and a host shrug; the anecdote card slides in on its own.
+	function failedJuice() {
+		void playSfx('wrong');
+		glitch(stageEl());
+		shrug(hostEl?.querySelector('img'));
 	}
 
 	function answer(r: Response) {
 		const asked = q;
 		const result = submit(rounds, game, r);
 		game = result.state;
+		void playSfx('select');
 		if (asked.kind === 'cta') return; // the end screen stays; the link opens in a new tab
 		correct = result.correct;
 		anecdote = asked.anecdote;
 		unlocks = asked.unlocks; // unlocked whether the answer was right or wrong
-		go('result');
+		go('result').then(result.correct ? compiledJuice : failedJuice);
+	}
+
+	// End screen: final stinger and a confetti-like pixel burst (ON AIR flicker and CTA pops are CSS/actions).
+	$effect(() => {
+		if (!ended) return;
+		untrack(() =>
+			tick().then(() => {
+				void playSfx('final');
+				if (fxEl) burst(fxEl, fxEl.clientWidth / 2, fxEl.clientHeight * 0.3, { count: 40, spread: 220, size: 8 });
+			})
+		);
+	});
+
+	// Small tier: hover tick (throttled, mouse only) and click tick on every .qbtn.
+	let hovered: Element | null = null;
+	let lastHover = 0;
+	function onHover(e: PointerEvent) {
+		if (e.pointerType !== 'mouse') return;
+		const b = (e.target as Element).closest?.('.qbtn:not(:disabled)') ?? null;
+		if (b === hovered) return;
+		hovered = b;
+		const now = performance.now();
+		if (!b || now - lastHover < 80) return;
+		lastHover = now;
+		void playSfx('ui-hover', { volume: 0.5 });
+	}
+	function onClick(e: MouseEvent) {
+		if ((e.target as Element).closest?.('.qbtn')) void playSfx('ui-click');
+	}
+
+	function begin() {
+		unlock(); // user gesture: creates the audio context; music starts with CAP-01
+		go('title');
 	}
 
 	// A new round starts at question 0; show its CAP-0N title card first.
@@ -67,14 +151,18 @@
 		const used = useLifeline(rounds, game, l);
 		if (!used) return;
 		game = used.state;
+		void playSfx('lifeline');
 		reveal = used.reveal.kind === 'text' ? used.reveal.text : ui.blameReveal;
 	}
 
 	function restart() {
+		stopMusic(); // the intro stays silent
 		game = createGame();
 		go('intro');
 	}
 </script>
+
+<svelte:document onpointerover={onHover} onclick={onClick} />
 
 <svelte:head>
 	<title>{t(ui.title, lang)}</title>
@@ -84,40 +172,60 @@
 	<h1 class="sr-only">{t(ui.showTitle, lang)}</h1>
 	<Stage era={round.era} compiled={ended ? TOTAL : game.answered.length} total={TOTAL}>
 		<div class="set" class:intro={phase === 'intro'}>
-			<div class="host"><Host line={hostLine} talking={phase === 'play' && !ended} /></div>
+			<div class="host" bind:this={hostEl}><Host line={hostLine} talking={phase === 'play' && !ended} /></div>
 
 			<div class="panel">
 				{#if phase === 'intro'}
 					<h2 class="show-title" tabindex="-1" data-focus>{t(ui.showTitle, lang)}</h2>
 					<p class="tagline">{t(ui.showTagline, lang)}</p>
-					<button type="button" class="qbtn primary" onclick={() => go('title')}>{t(ui.start, lang)}</button>
+					<button type="button" class="qbtn primary" onclick={begin}>{t(ui.start, lang)}</button>
 				{:else if ended}
 					<p class="eyebrow">{round.code} · {t(ui.question, lang)} {TOTAL}/{TOTAL}</p>
 					<h2 class="system" tabindex="-1" data-focus>SYSTEM</h2>
 					<p class="mono">&gt; {t(ui.system, lang)}</p>
 					{#if q.kind === 'cta'}
 						<UnlockList ids={q.unlocks} {lang} />
-						<div class="mechanic" data-kind="cta"><CtaChoice question={q} {lang} onanswer={answer} /></div>
+						<div class="mechanic" data-kind="cta" use:assemble={{ selector: '.qbtn', step: 90, delay: 300 }}>
+							<CtaChoice question={q} {lang} onanswer={answer} />
+						</div>
 					{/if}
-					<button type="button" class="qbtn again" onclick={restart}>{t(ui.playAgain, lang)}</button>
+					<button type="button" class="qbtn again" use:assemble={{ delay: 600 }} onclick={restart}>{t(ui.playAgain, lang)}</button>
 				{:else if phase === 'title'}
 					<p class="eyebrow">{t(round.age, lang)}</p>
-					<h2 class="card-title" tabindex="-1" data-focus>{round.code}</h2>
-					<p class="round-name">{t(round.title, lang)}</p>
-					<button type="button" class="qbtn primary" onclick={() => go('play')}>{t(ui.continue, lang)}</button>
+					<h2
+						class="card-title"
+						tabindex="-1"
+						data-focus
+						aria-label={round.code}
+						use:assemble={{ selector: '.ch', preset: 'slam', step: 40, delay: 220 }}
+					>
+						{#each round.code as ch, i (i)}<span class="ch" aria-hidden="true">{ch}</span>{/each}
+					</h2>
+					<p class="round-name" use:assemble={{ delay: 520 }}>{t(round.title, lang)}</p>
+					<button type="button" class="qbtn primary" use:assemble={{ delay: 600 }} onclick={() => go('play')}>{t(ui.continue, lang)}</button>
 				{:else if phase === 'result'}
 					{#if correct}
-						<h2 class="ok" tabindex="-1" data-focus>{t(ui.compiled, lang)}</h2>
+						<h2 class="ok" tabindex="-1" data-focus use:assemble={{ preset: 'climb' }}>{t(ui.compiled, lang)}</h2>
 					{:else}
 						<AnecdoteCard anecdote={t(anecdote, lang)} {lang} />
 					{/if}
 					<UnlockList ids={unlocks} {lang} />
 					<button type="button" class="qbtn primary" onclick={advance}>{t(ui.continue, lang)}</button>
 				{:else}
-					<h2 class="eyebrow" tabindex="-1" data-focus>
-						{round.code} · {t(ui.question, lang)} {number}/{TOTAL}
+					<h2
+						class="eyebrow"
+						tabindex="-1"
+						data-focus
+						aria-label={eyebrow}
+						use:assemble={{ selector: '.w', preset: 'kinetic', step: 35 }}
+					>
+						{#each eyebrow.split(' ') as w, i (i)}<span class="w" aria-hidden="true">{w}</span>{' '}{/each}
 					</h2>
-					<div class="mechanic" data-kind={q.kind}>
+					<div
+						class="mechanic"
+						data-kind={q.kind}
+						use:assemble={{ selector: ':scope > :not(.prompt) > *', step: 45, delay: 150 }}
+					>
 						{#if q.kind === 'choice'}
 							<Choice question={q} {lang} removed={game.removed} onanswer={answer} />
 						{:else if q.kind === 'truefalse'}
@@ -147,6 +255,9 @@
 				{/if}
 			</div>
 		</div>
+		<div class="fx-wipe" bind:this={wipeEl} aria-hidden="true"></div>
+		<div class="fx-flash" bind:this={flashEl} aria-hidden="true"></div>
+		<div class="fx-particles" bind:this={fxEl} aria-hidden="true"></div>
 	</Stage>
 
 	<aside class="ladder">
@@ -203,6 +314,27 @@
 			gap: 1.25rem;
 			padding: 1.25rem 1rem;
 		}
+	}
+
+	.fx-wipe,
+	.fx-flash,
+	.fx-particles {
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+	}
+	/* Diagonal curtain; clipped away at rest, the wipe animates its clip-path. */
+	.fx-wipe {
+		background: repeating-linear-gradient(115deg, var(--red) 0 28px, var(--red-deep) 28px 56px);
+		clip-path: polygon(0 0, 0 0, 0 0);
+	}
+	.fx-flash {
+		background: var(--paper);
+		opacity: 0;
+	}
+	.w,
+	.ch {
+		display: inline-block;
 	}
 
 	.panel {
