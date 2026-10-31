@@ -2,7 +2,7 @@ import { locales } from '$lib/i18n';
 
 export const prerender = true;
 
-const ORIGIN = 'https://cristhianac.dev';
+const ORIGIN = 'https://cristhianagamez.undercodes.net';
 
 export const GET = () => {
 	const urls = locales.flatMap((l) => [`/${l}`, `/${l}/recruiter`]);

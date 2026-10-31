@@ -1,7 +1,7 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 
-const ORIGIN = 'https://cristhianac.dev';
+const ORIGIN = 'https://cristhianagamez.undercodes.net';
 const pages = ['/es', '/en', '/es/recruiter', '/en/recruiter'];
 
 for (const path of pages) {

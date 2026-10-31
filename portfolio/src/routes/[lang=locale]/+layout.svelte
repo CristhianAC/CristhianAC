@@ -10,7 +10,7 @@
 
 	let { data, children } = $props();
 	const path = $derived(page.url.pathname.slice(data.lang.length + 1));
-	const ORIGIN = 'https://cristhianac.dev';
+	const ORIGIN = 'https://cristhianagamez.undercodes.net';
 	const rest = $derived(page.url.pathname.slice(3));
 	const title = $derived(t(path === '/recruiter' ? ui.recruiterTitle : ui.title, data.lang));
 	const description = $derived(t(ui.description, data.lang));
