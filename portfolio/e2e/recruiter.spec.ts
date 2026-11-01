@@ -41,3 +41,9 @@ test('one h1 and h2 sections', async ({ page }) => {
 	await expect(page.locator('h1')).toHaveCount(1);
 	expect(await page.locator('h2').count()).toBeGreaterThan(3);
 });
+
+test('back button returns to the quiz show', async ({ page }) => {
+	await page.goto('/es/recruiter');
+	await page.getByRole('link', { name: 'Volver al show' }).first().click();
+	await expect(page).toHaveURL(/\/es$/);
+});

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import RecruiterView from '$lib/components/recruiter/RecruiterView.svelte';
+	import RecruiterShow from '$lib/components/recruiter/RecruiterShow.svelte';
 	import { t, ui } from '$lib/i18n';
 
 	let { data } = $props();
@@ -9,4 +9,4 @@
 	<title>{t(ui.recruiterTitle, data.lang)}</title>
 </svelte:head>
 
-<RecruiterView lang={data.lang} print={false} />
+<RecruiterShow lang={data.lang} />

@@ -20,6 +20,12 @@ for (const path of pages) {
 
 	test(`axe: no serious or critical violations on ${path}`, async ({ page }) => {
 		await page.goto(path);
+		// Contrast is judged on the settled page, not mid-entrance (looping idle animations are ignored).
+		await page.waitForFunction(() =>
+			document
+				.getAnimations()
+				.every((a) => a.playState !== 'running' || a.effect?.getTiming().iterations === Infinity)
+		);
 		const { violations } = await new AxeBuilder({ page }).analyze();
 		const bad = violations.filter((v) => v.impact === 'serious' || v.impact === 'critical');
 		expect(bad.map((v) => `${v.id}: ${v.nodes.map((n) => n.target).join(' | ')}`)).toEqual([]);

@@ -152,3 +152,32 @@ export function burst(layer: HTMLElement | null, x: number, y: number, { count =
 		).onfinish = () => p.remove();
 	}
 }
+
+/** Runs `fn` once, the first time `node` scrolls into view. Without IntersectionObserver it runs at once. */
+function onceVisible(node: HTMLElement, fn: () => void) {
+	if (typeof IntersectionObserver === 'undefined') return fn();
+	const io = new IntersectionObserver((entries) => {
+		if (!entries.some((e) => e.isIntersecting)) return;
+		io.disconnect();
+		fn();
+	});
+	io.observe(node);
+	return { destroy: () => io.disconnect() };
+}
+
+/** Svelte action: `assemble`, but deferred until the node scrolls into view. Content stays visible without JS. */
+export const reveal = (node: HTMLElement, opts: Assemble) => onceVisible(node, () => assemble(node, opts));
+
+/** Svelte action: counts the node's number up from 0 when it scrolls into view. The SSR text is the final value. */
+export function countUp(node: HTMLElement, target: number) {
+	if (reduced() || typeof requestAnimationFrame === 'undefined') return;
+	return onceVisible(node, () => {
+		const start = performance.now();
+		const tick = (now: number) => {
+			const p = Math.min((now - start) / 900, 1);
+			node.textContent = String(Math.round(target * (1 - (1 - p) ** 3)));
+			if (p < 1) requestAnimationFrame(tick);
+		};
+		requestAnimationFrame(tick);
+	});
+}
