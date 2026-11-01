@@ -1,0 +1,36 @@
+name: Deploy portfolio
+
+on:
+  push:
+    branches: [main]
+    paths: ["portfolio/**", ".github/workflows/portfolio.yml"]
+  workflow_dispatch:
+
+concurrency:
+  group: portfolio-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: portfolio
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version-file: portfolio/.node-version
+          cache: npm
+          cache-dependency-path: portfolio/package-lock.json
+      - run: npm ci
+      - run: npm run build
+      - uses: cloudflare/wrangler-action@v4.1.3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: 8c9032f67ad07b968361ae36f37b9676
+          workingDirectory: portfolio
+          # First run creates the project; later runs ignore the "already exists" error.
+          preCommands: npx wrangler pages project create cristhianagamez --production-branch main || true
+          command: pages deploy build --project-name cristhianagamez --branch main
