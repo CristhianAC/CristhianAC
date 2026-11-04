@@ -32,6 +32,12 @@ const cristhian = {
 };
 ```
 
+### 🌍 Open source
+
+| Project | Contribution |
+|---|---|
+| 🟣 **[Odoo](https://github.com/odoo/odoo)** | [odoo/odoo#299482](https://github.com/odoo/odoo/pull/299482), merged into 20.0: forms and kanban quick creates no longer crash when the tab is hidden while they load. |
+
 ### 🚀 Featured work
 
 | Project | What it is |
